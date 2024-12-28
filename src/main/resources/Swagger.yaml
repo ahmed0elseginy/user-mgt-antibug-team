@@ -1,0 +1,248 @@
+openapi: 3.1.0
+info:
+  title: User Management API
+  description: APIs for managing users in Zag Systems.
+  version: 1.0.0
+
+servers:
+  - url: 'http://localhost:8000/'
+
+paths:
+  /addUser:
+    post:
+      tags:
+        - User
+      summary: Register a new user
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successfully registered user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Invalid input data
+        '500':
+          description: Internal server error
+
+  /updateUser:
+    put:
+      tags:
+        - User
+      summary: Update an existing user
+      operationId: updateUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: Successfully updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Invalid input data
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+
+  /deleteUser/{id}:
+    delete:
+      tags:
+        - User
+      summary: Delete a user
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the user to delete
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully deleted user
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+
+  /getAllUsers:
+    get:
+      tags:
+        - User
+      summary: Retrieve all users
+      operationId: getAllUsers
+      responses:
+        '200':
+          description: A list of all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+        '500':
+          description: Internal server error
+
+  /getUserById/{id}:
+    get:
+      tags:
+        - User
+      summary: Retrieve user details by ID
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique ID of the user
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - userName
+        - password
+        - email
+        - fullName
+        - mobileNumber
+        - role
+        - gender
+        - status
+      properties:
+        userName:
+          type: string
+          description: The username of the user
+        password:
+          type: string
+          description: The password for the user
+        email:
+          type: string
+          description: The email address of the user
+          format: email
+        fullName:
+          type: string
+          description: The full name of the user
+        mobileNumber:
+          type: string
+          description: The mobile number of the user
+        role:
+          type: string
+          description: The role assigned to the user
+        gender:
+          type: string
+          description: The gender of the user (e.g., Male, Female, Other)
+        status:
+          type: string
+          description: The status of the user account
+          enum:
+            - ACTIVE
+            - INACTIVE
+
+    UserUpdate:
+      type: object
+      required:
+        - id
+        - userName
+        - email
+        - password
+        - mobileNumber
+        - role
+        - status
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the user
+        userName:
+          type: string
+          description: The username of the user
+        email:
+          type: string
+          description: The email address of the user
+          format: email
+        password:
+          type: string
+          description: The updated password for the user
+        mobileNumber:
+          type: string
+          description: The updated mobile number of the user
+        role:
+          type: string
+          description: The updated role of the user
+        status:
+          type: string
+          description: The updated status of the user account
+          enum:
+            - ACTIVE
+            - INACTIVE
+
+    UserResponse:
+      type: object
+      required:
+        - id
+        - userName
+        - email
+        - fullName
+        - mobileNumber
+        - role
+        - gender
+        - status
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the user
+        userName:
+          type: string
+          description: The username of the user
+        email:
+          type: string
+          description: The email address of the user
+          format: email
+        fullName:
+          type: string
+          description: The full name of the user
+        mobileNumber:
+          type: string
+          description: The mobile number of the user
+        role:
+          type: string
+          description: The role of the user
+        gender:
+          type: string
+          description: The gender of the user
+        status:
+          type: string
+          description: The account status of the user
+          enum:
+            - ACTIVE
+            - INACTIVE
