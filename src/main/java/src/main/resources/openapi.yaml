@@ -1,248 +1,288 @@
 openapi: 3.1.0
 info:
-  title: User Management API
   description: APIs for managing users in Zag Systems.
+  title: User Management API
   version: 1.0.0
-
 servers:
-  - url: 'http://localhost:8000/'
-
+- url: http://localhost:8000/
 paths:
   /addUser:
     post:
-      tags:
-        - User
-      summary: Register a new user
       operationId: registerUser
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
+        required: true
       responses:
-        '200':
-          description: Successfully registered user
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
-        '400':
+          description: Successfully registered user
+        "400":
           description: Invalid input data
-        '500':
+        "500":
           description: Internal server error
-
+      summary: Register a new user
+      tags:
+      - User
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: User
   /updateUser:
     put:
-      tags:
-        - User
-      summary: Update an existing user
       operationId: updateUser
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UserUpdate'
+        required: true
       responses:
-        '200':
-          description: Successfully updated user
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
-        '400':
+          description: Successfully updated user
+        "400":
           description: Invalid input data
-        '404':
+        "404":
           description: User not found
-        '500':
+        "500":
           description: Internal server error
-
+      summary: Update an existing user
+      tags:
+      - User
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: User
   /deleteUser/{id}:
     delete:
-      tags:
-        - User
-      summary: Delete a user
       operationId: deleteUser
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The ID of the user to delete
-          schema:
-            type: integer
+      - description: The ID of the user to delete
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
       responses:
-        '200':
-          description: Successfully deleted user
+        "200":
           content:
             application/json:
               schema:
                 type: string
-        '404':
+          description: Successfully deleted user
+        "404":
           description: User not found
-        '500':
+        "500":
           description: Internal server error
-
+      summary: Delete a user
+      tags:
+      - User
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: User
   /getAllUsers:
     get:
-      tags:
-        - User
-      summary: Retrieve all users
       operationId: getAllUsers
       responses:
-        '200':
-          description: A list of all users
+        "200":
           content:
             application/json:
               schema:
-                type: array
                 items:
                   $ref: '#/components/schemas/UserResponse'
-        '500':
+                type: array
+          description: A list of all users
+        "500":
           description: Internal server error
-
+      summary: Retrieve all users
+      tags:
+      - User
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: User
   /getUserById/{id}:
     get:
-      tags:
-        - User
-      summary: Retrieve user details by ID
       operationId: getUserById
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The unique ID of the user
-          schema:
-            type: integer
+      - description: The unique ID of the user
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
       responses:
-        '200':
-          description: User details retrieved successfully
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
-        '404':
+          description: User details retrieved successfully
+        "404":
           description: User not found
-        '500':
+        "500":
           description: Internal server error
-
+      summary: Retrieve user details by ID
+      tags:
+      - User
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: User
 components:
   schemas:
     User:
-      type: object
-      required:
-        - userName
-        - password
-        - email
-        - fullName
-        - mobileNumber
-        - role
-        - gender
-        - status
+      example:
+        password: password
+        role: role
+        gender: gender
+        mobileNumber: mobileNumber
+        fullName: fullName
+        userName: userName
+        email: email
+        status: ACTIVE
       properties:
         userName:
-          type: string
           description: The username of the user
+          type: string
         password:
-          type: string
           description: The password for the user
-        email:
           type: string
+        email:
           description: The email address of the user
           format: email
+          type: string
         fullName:
-          type: string
           description: The full name of the user
+          type: string
         mobileNumber:
-          type: string
           description: The mobile number of the user
+          type: string
         role:
-          type: string
           description: The role assigned to the user
+          type: string
         gender:
+          description: "The gender of the user (e.g., Male, Female, Other)"
           type: string
-          description: The gender of the user (e.g., Male, Female, Other)
         status:
-          type: string
           description: The status of the user account
           enum:
-            - ACTIVE
-            - INACTIVE
-
-    UserUpdate:
-      type: object
+          - ACTIVE
+          - INACTIVE
+          type: string
       required:
-        - id
-        - userName
-        - email
-        - password
-        - mobileNumber
-        - role
-        - status
+      - email
+      - fullName
+      - gender
+      - mobileNumber
+      - password
+      - role
+      - status
+      - userName
+    UserUpdate:
+      example:
+        password: password
+        role: role
+        mobileNumber: mobileNumber
+        id: 0
+        userName: userName
+        email: email
+        status: ACTIVE
       properties:
         id:
-          type: integer
           description: The unique ID of the user
+          type: integer
         userName:
-          type: string
           description: The username of the user
-        email:
           type: string
+        email:
           description: The email address of the user
           format: email
+          type: string
         password:
-          type: string
           description: The updated password for the user
+          type: string
         mobileNumber:
-          type: string
           description: The updated mobile number of the user
+          type: string
         role:
-          type: string
           description: The updated role of the user
-        status:
           type: string
+        status:
           description: The updated status of the user account
           enum:
-            - ACTIVE
-            - INACTIVE
-
-    UserResponse:
-      type: object
+          - ACTIVE
+          - INACTIVE
+          type: string
       required:
-        - id
-        - userName
-        - email
-        - fullName
-        - mobileNumber
-        - role
-        - gender
-        - status
+      - email
+      - id
+      - mobileNumber
+      - password
+      - role
+      - status
+      - userName
+    UserResponse:
+      example:
+        role: role
+        gender: gender
+        mobileNumber: mobileNumber
+        fullName: fullName
+        id: 0
+        userName: userName
+        email: email
+        status: ACTIVE
       properties:
         id:
-          type: integer
           description: The unique ID of the user
+          type: integer
         userName:
-          type: string
           description: The username of the user
-        email:
           type: string
+        email:
           description: The email address of the user
           format: email
+          type: string
         fullName:
-          type: string
           description: The full name of the user
+          type: string
         mobileNumber:
-          type: string
           description: The mobile number of the user
+          type: string
         role:
-          type: string
           description: The role of the user
+          type: string
         gender:
-          type: string
           description: The gender of the user
-        status:
           type: string
+        status:
           description: The account status of the user
           enum:
-            - ACTIVE
-            - INACTIVE
+          - ACTIVE
+          - INACTIVE
+          type: string
+      required:
+      - email
+      - fullName
+      - gender
+      - id
+      - mobileNumber
+      - role
+      - status
+      - userName

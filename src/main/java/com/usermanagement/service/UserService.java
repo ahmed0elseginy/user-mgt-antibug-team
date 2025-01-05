@@ -1,7 +1,7 @@
 package com.usermanagement.service;
 
-import com.usermanagement.dto.response.UserResponse;
-import com.usermanagement.model.enitity.User;
+import com.usermanagement.model.dto.response.UserResponse;
+import com.usermanagement.model.entity.User;
 
 import java.util.List;
 

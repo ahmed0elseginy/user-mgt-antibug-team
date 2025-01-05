@@ -2,10 +2,9 @@ package com.usermanagement.mapper;
 
 
 
-import com.usermanagement.model.enitity.User;
+import com.usermanagement.model.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 //import userDto.User;
 //import userDto.UserResponse;
 //import userDto.UserUpdate;

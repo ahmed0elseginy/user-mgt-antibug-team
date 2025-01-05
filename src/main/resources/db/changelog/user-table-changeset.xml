@@ -22,5 +22,4 @@
             <column name="gender" type="VARCHAR(255)" />
         </createTable>
     </changeSet>
-
 </databaseChangeLog>
