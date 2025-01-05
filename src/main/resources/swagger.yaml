@@ -28,10 +28,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
+<<<<<<< Updated upstream:src/main/resources/swagger.yaml
 #        '400':
 #          $ref: '#/components/responses/BadRequest'
 #        '500':
 #          $ref: '#/components/responses/InternalError'
+=======
+    #        '400':
+    #          $ref: '#/components/responses/BadRequest'
+    #        '500':
+    #          $ref: '#/components/responses/InternalError'
+>>>>>>> Stashed changes:src/main/resources/Swagger.yaml
     get:
       tags:
         - User Management
@@ -46,8 +53,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/UserResponse'
+<<<<<<< Updated upstream:src/main/resources/swagger.yaml
 #        '500':
 #          $ref: '#/components/responses/InternalError'
+=======
+  #        '500':
+  #          $ref: '#/components/responses/InternalError'
+>>>>>>> Stashed changes:src/main/resources/Swagger.yaml
 
   /users/{id}:
     get:
@@ -69,10 +81,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
+<<<<<<< Updated upstream:src/main/resources/swagger.yaml
 #        '404':
 #          $ref: '#/components/responses/NotFound'
 #        '500':
 #          $ref: '#/components/responses/InternalError'
+=======
+    #        '404':
+    #          $ref: '#/components/responses/NotFound'
+    #        '500':
+    #          $ref: '#/components/responses/InternalError'
+>>>>>>> Stashed changes:src/main/resources/Swagger.yaml
 
     put:
       tags:
@@ -100,12 +119,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
+<<<<<<< Updated upstream:src/main/resources/swagger.yaml
 #        '400':
 #          $ref: '#/components/responses/BadRequest'
 #        '404':
 #          $ref: '#/components/responses/NotFound'
 #        '500':
 #          $ref: '#/components/responses/InternalError'
+=======
+    #        '400':
+    #          $ref: '#/components/responses/BadRequest'
+    #        '404':
+    #          $ref: '#/components/responses/NotFound'
+    #        '500':
+    #          $ref: '#/components/responses/InternalError'
+>>>>>>> Stashed changes:src/main/resources/Swagger.yaml
 
     delete:
       tags:

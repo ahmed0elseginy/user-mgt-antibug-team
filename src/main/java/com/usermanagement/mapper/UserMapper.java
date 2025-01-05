@@ -1,8 +1,12 @@
 package com.usermanagement.mapper;
 
+<<<<<<< Updated upstream
 
 
 import com.usermanagement.model.entity.User;
+=======
+import com.usermanagement.model.enitity.User;
+>>>>>>> Stashed changes
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 //import userDto.User;
