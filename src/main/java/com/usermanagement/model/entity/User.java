@@ -1,5 +1,6 @@
 package com.usermanagement.model.entity;
 
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -43,8 +44,8 @@ public class User {
 
     @NotNull(message = "You must enter your gender")
     @Column(unique = true, nullable = false)
-    private String gender;
+    private Gender gender;
 
-/*  @NotNull(message = "You must enter your status")
-  private Status status;*/
+ @NotNull(message = "You must enter your status")
+  private Status status;
 }

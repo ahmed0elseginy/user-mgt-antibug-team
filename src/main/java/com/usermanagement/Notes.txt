@@ -1,0 +1,37 @@
+-- Build Best structure project                   -Done
+
+- Generate a code from Swagger bre implementation - *
+    -use lombok in swagger
+    -Create interface for api and classes dto     - Done
+
+                            update yaml file -- shahd
+    -update password api
+    -add validation for api
+    -Update Classes in DTO (Request , Response)
+
+
+
+- liquibase                                      - Done
+    -Use liquibase and implement files           - Done
+
+
+- Business implementation                   - * first step
+    -- Service and Controller
+    -- Status codes best practices
+    -- add hashing for password
+    -- updatePassword {password : 123 -- > check , updatePassword : 321 -- > update}
+
+    -- Class for response (Message and data(list ,error) )
+    -- Cheeking for any action (if user not exist)
+    -- Mapper Class and DTO
+
+- exception handler
+    -- Class for response (Message and data(list ,error) )
+    - Binding exception
+    - Runtime exception
+
+- ActiveMQ
+
+- Testing
+
+- Security
