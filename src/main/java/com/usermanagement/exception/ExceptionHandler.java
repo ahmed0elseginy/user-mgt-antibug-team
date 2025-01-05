@@ -3,7 +3,6 @@ package com.usermanagement.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
@@ -11,9 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice    //for all Controllers
-public class UserHandler {
+public class ExceptionHandler {
 
-    @ExceptionHandler(BindException.class)
+    @org.springframework.web.bind.annotation.ExceptionHandler(BindException.class)
     public ResponseEntity<HashMap<String, List<String>>> handlerException(BindException ex){
         List<String> errors=ex.getAllErrors().stream()
                 .map((exception)->exception.getDefaultMessage())

@@ -16,5 +16,4 @@ public interface UserService {
 
     public String deleteUserById(Integer id);
 
-
 }

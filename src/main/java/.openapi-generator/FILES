@@ -1,8 +1,0 @@
-.openapi-generator-ignore
-README.md
-com/usermanagement/controller/ApiUtil.java
-com/usermanagement/controller/UsersApi.java
-com/usermanagement/model/dto/UserCreate.java
-com/usermanagement/model/dto/UserResponse.java
-com/usermanagement/model/dto/UserUpdate.java
-pom.xml
