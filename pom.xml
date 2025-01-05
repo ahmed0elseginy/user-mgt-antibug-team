@@ -68,8 +68,11 @@
         </dependency>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <!--        validation -->
 =======
+=======
+>>>>>>> Stashed changes
         <!--        Apis annotation-->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -141,7 +144,11 @@
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 <version>7.10.0</version>
+=======
+                <version>7.10.0</version> <!-- استبدل بالنسخة التي تحتاجها -->
+>>>>>>> Stashed changes
 =======
                 <version>7.10.0</version> <!-- استبدل بالنسخة التي تحتاجها -->
 >>>>>>> Stashed changes
@@ -156,6 +163,7 @@
 
                             <!-- نوع المولد -->
                             <generatorName>spring</generatorName>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
                             <apiPackage>com.usermanagement.controller</apiPackage>
                             <modelPackage>com.usermanagement.model.dto</modelPackage>
@@ -182,10 +190,26 @@
                             <!-- إعدادات التكوين -->
                             <configOptions>
                                 <sourceFolder>/</sourceFolder>
+=======
+
+                            <!-- حزم التوليد -->
+                            <apiPackage>com.usermanagement.controller.api</apiPackage>
+                            <modelPackage>com.usermanagement.model.dto</modelPackage>
+
+                            <!-- مسار الإخراج -->
+                            <output>src/main/java</output>
+
+                            <!-- إعدادات التكوين -->
+                            <configOptions>
+                                <sourceFolder>/</sourceFolder>
+>>>>>>> Stashed changes
                                 <interfaceOnly>true</interfaceOnly> <!-- توليد واجهات فقط -->
                                 <useJakartaEe>true</useJakartaEe> <!-- استخدام Jakarta EE -->
                                 <apiInterface>UserManagementApi</apiInterface> <!-- اسم واجهة واحدة لجميع APIs -->
 <!--                                <skipDefaultInterface>false</skipDefaultInterface> &lt;!&ndash; تضمين واجهة واحدة فقط &ndash;&gt;-->
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                             </configOptions>
 
