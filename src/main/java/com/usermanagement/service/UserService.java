@@ -1,14 +1,7 @@
 package com.usermanagement.service;
 
 import com.usermanagement.model.dto.response.UserResponse;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 import com.usermanagement.model.entity.User;
-=======
-=======
->>>>>>> Stashed changes
-import com.usermanagement.model.enitity.User;
->>>>>>> Stashed changes
 
 import java.util.List;
 
