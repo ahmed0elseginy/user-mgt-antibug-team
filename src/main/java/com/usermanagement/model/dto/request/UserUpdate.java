@@ -16,11 +16,13 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * UserCreate
+ * UserUpdate
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-06T00:24:58.340690400+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
-public class UserCreate {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-06T20:29:17.437296100+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+public class UserUpdate {
+
+  private Integer id;
 
   private String userName;
 
@@ -28,13 +30,9 @@ public class UserCreate {
 
   private String email;
 
-  private String fullName;
-
   private String mobileNumber;
 
   private String role;
-
-  private String gender;
 
   /**
    * The status of the user account
@@ -73,25 +71,38 @@ public class UserCreate {
 
   private StatusEnum status;
 
-  public UserCreate() {
+  public UserUpdate() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public UserCreate(String userName, String password, String email, String fullName, String mobileNumber, String role, String gender, StatusEnum status) {
-    this.userName = userName;
-    this.password = password;
-    this.email = email;
-    this.fullName = fullName;
-    this.mobileNumber = mobileNumber;
-    this.role = role;
-    this.gender = gender;
-    this.status = status;
+  public UserUpdate(Integer id) {
+    this.id = id;
   }
 
-  public UserCreate userName(String userName) {
+  public UserUpdate id(Integer id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * The unique ID of the user
+   * @return id
+   */
+  @NotNull 
+  @Schema(name = "id", description = "The unique ID of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("id")
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public UserUpdate userName(String userName) {
     this.userName = userName;
     return this;
   }
@@ -100,8 +111,8 @@ public class UserCreate {
    * The username of the user
    * @return userName
    */
-  @NotNull 
-  @Schema(name = "userName", description = "The username of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Pattern(regexp = "^[A-Za-z]+$|^[A-Za-z]+\\d+$") 
+  @Schema(name = "userName", description = "The username of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("userName")
   public String getUserName() {
     return userName;
@@ -111,7 +122,7 @@ public class UserCreate {
     this.userName = userName;
   }
 
-  public UserCreate password(String password) {
+  public UserUpdate password(String password) {
     this.password = password;
     return this;
   }
@@ -120,8 +131,8 @@ public class UserCreate {
    * The password for the user
    * @return password
    */
-  @NotNull 
-  @Schema(name = "password", description = "The password for the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Pattern(regexp = "^[A-Za-z]+\\d{2}$") @Size(min = 5, max = 10) 
+  @Schema(name = "password", description = "The password for the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("password")
   public String getPassword() {
     return password;
@@ -131,7 +142,7 @@ public class UserCreate {
     this.password = password;
   }
 
-  public UserCreate email(String email) {
+  public UserUpdate email(String email) {
     this.email = email;
     return this;
   }
@@ -140,8 +151,8 @@ public class UserCreate {
    * The email address of the user
    * @return email
    */
-  @NotNull @jakarta.validation.constraints.Email 
-  @Schema(name = "email", description = "The email address of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @jakarta.validation.constraints.Email 
+  @Schema(name = "email", description = "The email address of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("email")
   public String getEmail() {
     return email;
@@ -151,27 +162,7 @@ public class UserCreate {
     this.email = email;
   }
 
-  public UserCreate fullName(String fullName) {
-    this.fullName = fullName;
-    return this;
-  }
-
-  /**
-   * The full name of the user
-   * @return fullName
-   */
-  @NotNull 
-  @Schema(name = "fullName", description = "The full name of the user", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("fullName")
-  public String getFullName() {
-    return fullName;
-  }
-
-  public void setFullName(String fullName) {
-    this.fullName = fullName;
-  }
-
-  public UserCreate mobileNumber(String mobileNumber) {
+  public UserUpdate mobileNumber(String mobileNumber) {
     this.mobileNumber = mobileNumber;
     return this;
   }
@@ -180,8 +171,8 @@ public class UserCreate {
    * The mobile number of the user
    * @return mobileNumber
    */
-  @NotNull 
-  @Schema(name = "mobileNumber", description = "The mobile number of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Pattern(regexp = "^\\d{11}$") 
+  @Schema(name = "mobileNumber", description = "The mobile number of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("mobileNumber")
   public String getMobileNumber() {
     return mobileNumber;
@@ -191,7 +182,7 @@ public class UserCreate {
     this.mobileNumber = mobileNumber;
   }
 
-  public UserCreate role(String role) {
+  public UserUpdate role(String role) {
     this.role = role;
     return this;
   }
@@ -200,8 +191,8 @@ public class UserCreate {
    * The role assigned to the user
    * @return role
    */
-  @NotNull 
-  @Schema(name = "role", description = "The role assigned to the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Pattern(regexp = "[A-Za-z]+$") 
+  @Schema(name = "role", description = "The role assigned to the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("role")
   public String getRole() {
     return role;
@@ -211,27 +202,7 @@ public class UserCreate {
     this.role = role;
   }
 
-  public UserCreate gender(String gender) {
-    this.gender = gender;
-    return this;
-  }
-
-  /**
-   * The gender of the user (e.g., Male, Female, Other)
-   * @return gender
-   */
-  @NotNull 
-  @Schema(name = "gender", description = "The gender of the user (e.g., Male, Female, Other)", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("gender")
-  public String getGender() {
-    return gender;
-  }
-
-  public void setGender(String gender) {
-    this.gender = gender;
-  }
-
-  public UserCreate status(StatusEnum status) {
+  public UserUpdate status(StatusEnum status) {
     this.status = status;
     return this;
   }
@@ -240,8 +211,8 @@ public class UserCreate {
    * The status of the user account
    * @return status
    */
-  @NotNull 
-  @Schema(name = "status", description = "The status of the user account", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "status", description = "The status of the user account", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("status")
   public StatusEnum getStatus() {
     return status;
@@ -259,33 +230,31 @@ public class UserCreate {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserCreate userCreate = (UserCreate) o;
-    return Objects.equals(this.userName, userCreate.userName) &&
-        Objects.equals(this.password, userCreate.password) &&
-        Objects.equals(this.email, userCreate.email) &&
-        Objects.equals(this.fullName, userCreate.fullName) &&
-        Objects.equals(this.mobileNumber, userCreate.mobileNumber) &&
-        Objects.equals(this.role, userCreate.role) &&
-        Objects.equals(this.gender, userCreate.gender) &&
-        Objects.equals(this.status, userCreate.status);
+    UserUpdate userUpdate = (UserUpdate) o;
+    return Objects.equals(this.id, userUpdate.id) &&
+        Objects.equals(this.userName, userUpdate.userName) &&
+        Objects.equals(this.password, userUpdate.password) &&
+        Objects.equals(this.email, userUpdate.email) &&
+        Objects.equals(this.mobileNumber, userUpdate.mobileNumber) &&
+        Objects.equals(this.role, userUpdate.role) &&
+        Objects.equals(this.status, userUpdate.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userName, password, email, fullName, mobileNumber, role, gender, status);
+    return Objects.hash(id, userName, password, email, mobileNumber, role, status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserCreate {\n");
+    sb.append("class UserUpdate {\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    fullName: ").append(toIndentedString(fullName)).append("\n");
     sb.append("    mobileNumber: ").append(toIndentedString(mobileNumber)).append("\n");
     sb.append("    role: ").append(toIndentedString(role)).append("\n");
-    sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();

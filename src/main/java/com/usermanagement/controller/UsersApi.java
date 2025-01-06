@@ -8,6 +8,7 @@ package com.usermanagement.controller;
 import com.usermanagement.model.dto.UserCreate;
 import com.usermanagement.model.dto.UserResponse;
 import com.usermanagement.model.dto.UserUpdate;
+import com.usermanagement.model.dto.UserUpdatePassword;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-06T00:24:58.340690400+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-06T20:29:17.437296100+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
 @Validated
 @Tag(name = "User Management", description = "the User Management API")
 public interface UsersApi {
@@ -47,15 +48,15 @@ public interface UsersApi {
      * POST /users : Create a new user
      *
      * @param userCreate Details of the new user to create (required)
-     * @return User created successfully (status code 201)
+     * @return User created successfully (status code 200)
      */
     @Operation(
         operationId = "createUser",
         summary = "Create a new user",
         tags = { "User Management" },
         responses = {
-            @ApiResponse(responseCode = "201", description = "User created successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))
+            @ApiResponse(responseCode = "200", description = "User created successfully", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
         }
     )
@@ -66,13 +67,13 @@ public interface UsersApi {
         consumes = { "application/json" }
     )
     
-    default ResponseEntity<UserResponse> createUser(
+    default ResponseEntity<String> createUser(
         @Parameter(name = "UserCreate", description = "Details of the new user to create", required = true) @Valid @RequestBody UserCreate userCreate
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"role\" : \"role\", \"gender\" : \"gender\", \"mobileNumber\" : \"mobileNumber\", \"fullName\" : \"fullName\", \"id\" : 0, \"userName\" : \"userName\", \"email\" : \"email\", \"status\" : \"ACTIVE\" }";
+                    String exampleString = "\"User Added successfully.\"";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -149,7 +150,7 @@ public interface UsersApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"role\" : \"role\", \"gender\" : \"gender\", \"mobileNumber\" : \"mobileNumber\", \"fullName\" : \"fullName\", \"id\" : 0, \"userName\" : \"userName\", \"email\" : \"email\", \"status\" : \"ACTIVE\" }, { \"role\" : \"role\", \"gender\" : \"gender\", \"mobileNumber\" : \"mobileNumber\", \"fullName\" : \"fullName\", \"id\" : 0, \"userName\" : \"userName\", \"email\" : \"email\", \"status\" : \"ACTIVE\" } ]";
+                    String exampleString = "[ { \"role\" : \"role\", \"gender\" : \"MALE\", \"mobileNumber\" : \"mobileNumber\", \"fullName\" : \"fullName\", \"id\" : 0, \"userName\" : \"userName\", \"email\" : \"email\", \"status\" : \"ACTIVE\" }, { \"role\" : \"role\", \"gender\" : \"MALE\", \"mobileNumber\" : \"mobileNumber\", \"fullName\" : \"fullName\", \"id\" : 0, \"userName\" : \"userName\", \"email\" : \"email\", \"status\" : \"ACTIVE\" } ]";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -188,7 +189,7 @@ public interface UsersApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"role\" : \"role\", \"gender\" : \"gender\", \"mobileNumber\" : \"mobileNumber\", \"fullName\" : \"fullName\", \"id\" : 0, \"userName\" : \"userName\", \"email\" : \"email\", \"status\" : \"ACTIVE\" }";
+                    String exampleString = "{ \"role\" : \"role\", \"gender\" : \"MALE\", \"mobileNumber\" : \"mobileNumber\", \"fullName\" : \"fullName\", \"id\" : 0, \"userName\" : \"userName\", \"email\" : \"email\", \"status\" : \"ACTIVE\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -212,7 +213,7 @@ public interface UsersApi {
         tags = { "User Management" },
         responses = {
             @ApiResponse(responseCode = "200", description = "User updated successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
         }
     )
@@ -223,14 +224,56 @@ public interface UsersApi {
         consumes = { "application/json" }
     )
     
-    default ResponseEntity<UserResponse> updateUser(
+    default ResponseEntity<String> updateUser(
         @Parameter(name = "id", description = "The unique ID of the user", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id,
         @Parameter(name = "UserUpdate", description = "Updated details of the user", required = true) @Valid @RequestBody UserUpdate userUpdate
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"role\" : \"role\", \"gender\" : \"gender\", \"mobileNumber\" : \"mobileNumber\", \"fullName\" : \"fullName\", \"id\" : 0, \"userName\" : \"userName\", \"email\" : \"email\", \"status\" : \"ACTIVE\" }";
+                    String exampleString = "\"User Updated successfully.\"";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * PUT /users/{id}/passwordupdate : Update password  of an existing user
+     *
+     * @param id The unique ID of the user (required)
+     * @param userUpdatePassword Updated Password of the user (required)
+     * @return User Password updated successfully (status code 200)
+     */
+    @Operation(
+        operationId = "updateUserPassword",
+        summary = "Update password  of an existing user",
+        tags = { "User Management" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "User Password updated successfully", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.PUT,
+        value = "/users/{id}/passwordupdate",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    
+    default ResponseEntity<String> updateUserPassword(
+        @Parameter(name = "id", description = "The unique ID of the user", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id,
+        @Parameter(name = "UserUpdatePassword", description = "Updated Password of the user", required = true) @Valid @RequestBody UserUpdatePassword userUpdatePassword
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "\"User Password Updated successfully.\"";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

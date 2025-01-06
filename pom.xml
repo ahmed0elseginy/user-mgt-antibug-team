@@ -55,7 +55,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version> <!-- Replace with the latest version -->
+            <version>1.18.24</version>
             <optional>true</optional>
         </dependency>
 
@@ -64,7 +64,6 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>1.6.3</version>
-            <!--            <version>${org.mapstruct.version}</version>-->
         </dependency>
 
         <!--        validation -->
@@ -83,7 +82,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version> <!-- تأكد من استخدام إصدار حديث -->
+            <version>8.0.33</version>
             <scope>runtime</scope>
         </dependency>
 
@@ -100,7 +99,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <!--        Apis annotation-->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -112,6 +110,12 @@
             <groupId>org.openapitools</groupId>
             <artifactId>jackson-databind-nullable</artifactId>
             <version>0.2.6</version>
+        </dependency>
+
+        <!--        Active MQ-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
         </dependency>
 
     </dependencies>
@@ -139,17 +143,41 @@
                                 <sourceFolder>/</sourceFolder>
                                 <interfaceOnly>true</interfaceOnly>
                                 <singleInterface>true</singleInterface>
-                                <modelNameSuffix>Model</modelNameSuffix>
                                 <useJakartaEe>true</useJakartaEe>
                                 <useOptionalForNullable>true</useOptionalForNullable>
-<!--                                <skipDefaultInterface>false</skipDefaultInterface>-->
-
-
                             </configOptions>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Maven Antrun Plugin for moving DTOs after generation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target name="move-files">
+                                <move file="src/main/java/com/usermanagement/model/dto/UserCreate.java"
+                                      tofile="src/main/java/com/usermanagement/model/dto/request/UserCreate.java"/>
+                                <move file="src/main/java/com/usermanagement/model/dto/UserUpdatePassword.java"
+                                      tofile="src/main/java/com/usermanagement/model/dto/request/UserUpdatePassword.java"/>
+                                <move file="src/main/java/com/usermanagement/model/dto/UserUpdate.java"
+                                      tofile="src/main/java/com/usermanagement/model/dto/request/UserUpdate.java"/>
+                                <move file="src/main/java/com/usermanagement/model/dto/UserResponse.java"
+                                      tofile="src/main/java/com/usermanagement/model/dto/response/UserResponse.java"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
 
             <!-- Compiler Plugin -->
             <plugin>
@@ -168,13 +196,12 @@
                             <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>
                             <version>1.6.3</version>
-                            <!--                            <version>${org.mapstruct.version}</version>-->
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
 
-            <!--            maven-compiler -->
+            <!-- Maven-compiler for lombok -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -188,7 +215,7 @@
                 </configuration>
             </plugin>
 
-            <!--            asciidoctor -->
+            <!-- Asciidoctor for documentation -->
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
@@ -207,17 +234,15 @@
                     </execution>
                 </executions>
                 <dependencies>
-
                     <dependency>
                         <groupId>org.springframework.restdocs</groupId>
                         <artifactId>spring-restdocs-asciidoctor</artifactId>
                         <version>2.0.6.RELEASE</version>
                     </dependency>
-
                 </dependencies>
             </plugin>
 
-            <!--            lombok -->
+            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

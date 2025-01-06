@@ -5,4 +5,5 @@ com/usermanagement/controller/UsersApi.java
 com/usermanagement/model/dto/UserCreate.java
 com/usermanagement/model/dto/UserResponse.java
 com/usermanagement/model/dto/UserUpdate.java
+com/usermanagement/model/dto/UserUpdatePassword.java
 pom.xml

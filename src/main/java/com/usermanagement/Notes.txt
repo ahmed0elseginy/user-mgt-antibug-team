@@ -5,15 +5,14 @@
     -Create interface for api and classes dto     - Done
 
                             update yaml file -- shahd
-    -update password api
-    -add validation for api
-    -Update Classes in DTO (Request , Response)
-
+    -update password api           -Done
+    -add validation for api        -Done
+    -Update Classes in DTO (Request , Response)      - Done
 
 
 - liquibase                                      - Done
     -Use liquibase and implement files           - Done
-
+    -Relation between tables(Genders ,Statuses,Users) ********************
 
 - Business implementation                   - * first step
     -- Service and Controller
@@ -27,10 +26,10 @@
 
 - exception handler
     -- Class for response (Message and data(list ,error) )
-    - Binding exception
-    - Runtime exception
+    - Binding exception           -Done
+    - Runtime exception           -Done
 
-- ActiveMQ
+- ActiveMQ              -Done
 
 - Testing
 

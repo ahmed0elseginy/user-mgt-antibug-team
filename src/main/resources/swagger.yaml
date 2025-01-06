@@ -22,12 +22,13 @@ paths:
             schema:
               $ref: '#/components/schemas/UserCreate'
       responses:
-        '201':
+        '200':
           description: User created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                type: string
+                example: "User Added successfully."
 #        '400':
 #          $ref: '#/components/responses/BadRequest'
 #        '500':
@@ -99,7 +100,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                type: string
+                example: "User Updated successfully."
 #        '400':
 #          $ref: '#/components/responses/BadRequest'
 #        '404':
@@ -132,6 +134,42 @@ paths:
 #        '500':
 #          $ref: '#/components/responses/InternalError'
 
+  /users/{id}/passwordupdate:
+    put:
+      tags:
+        - User Management
+      summary: Update password  of an existing user
+      operationId: updateUserPassword
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique ID of the user
+          schema:
+            type: integer
+      requestBody:
+        description: Updated Password of the user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdatePassword'
+      responses:
+        '200':
+          description: User Password updated successfully
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "User Password Updated successfully."
+  #        '400':
+  #          $ref: '#/components/responses/BadRequest'
+  #        '404':
+  #          $ref: '#/components/responses/NotFound'
+  #        '500':
+  #          $ref: '#/components/responses/InternalError'
+
+
 components:
   schemas:
     UserCreate:
@@ -149,9 +187,13 @@ components:
         userName:
           type: string
           description: The username of the user
+          pattern: "^[A-Za-z]+$|^[A-Za-z]+\\d+$"       #letters or letter and end digits
         password:
           type: string
           description: The password for the user
+          minLength: 5
+          maxLength: 10
+          pattern: "^[A-Za-z]+\\d{2}$"
         email:
           type: string
           description: The email address of the user
@@ -159,15 +201,21 @@ components:
         fullName:
           type: string
           description: The full name of the user
+          pattern: "[A-Za-z]+$"
         mobileNumber:
           type: string
           description: The mobile number of the user
+          pattern: "^\\d{11}$"
         role:
           type: string
           description: The role assigned to the user
+          pattern: "[A-Za-z]+$"
         gender:
           type: string
-          description: The gender of the user (e.g., Male, Female, Other)
+          description: The gender of the user
+          enum:
+            - MALE
+            - FEMALE
         status:
           type: string
           description: The status of the user account
@@ -186,25 +234,52 @@ components:
         userName:
           type: string
           description: The username of the user
+          pattern: "^[A-Za-z]+$|^[A-Za-z]+\\d+$"       #letters or letter and end digits
+        password:
+          type: string
+          description: The password for the user
+          minLength: 5
+          maxLength: 10
+          pattern: "^[A-Za-z]+\\d{2}$"
         email:
           type: string
           description: The email address of the user
           format: email
-        password:
-          type: string
-          description: The updated password for the user
         mobileNumber:
           type: string
-          description: The updated mobile number of the user
+          description: The mobile number of the user
+          pattern: "^\\d{11}$"
         role:
           type: string
-          description: The updated role of the user
+          description: The role assigned to the user
+          pattern: "[A-Za-z]+$"
         status:
           type: string
-          description: The updated status of the user account
+          description: The status of the user account
           enum:
             - ACTIVE
             - INACTIVE
+
+    UserUpdatePassword:
+      type: object
+      required:
+        - id
+        - oldPassword
+        - newPassword
+      properties:
+        oldPassword:
+          type: string
+          description: The password for the user
+          minLength: 5
+          maxLength: 10
+          pattern: "^[A-Za-z]+\\d{2}$"
+        newPassword:
+          type: string
+          description: The New Password Of The User
+          minLength: 5
+          maxLength: 10
+          pattern: "^[A-Za-z]+\\d{2}$"
+
 
     UserResponse:
       type: object
@@ -231,6 +306,9 @@ components:
         gender:
           type: string
           description: The gender of the user
+          enum:
+            - MALE
+            - FEMALE
         status:
           type: string
           description: The account status of the user

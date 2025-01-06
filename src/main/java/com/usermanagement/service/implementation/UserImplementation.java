@@ -1,7 +1,7 @@
 package com.usermanagement.service.implementation;
 
+import com.usermanagement.model.dto.UserResponse;
 import com.usermanagement.model.dto.UserUpdate;
-import com.usermanagement.model.dto.response.UserResponse;
 import com.usermanagement.model.entity.User;
 import com.usermanagement.service.UserService;
 

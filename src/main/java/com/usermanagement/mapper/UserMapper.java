@@ -3,6 +3,7 @@ package com.usermanagement.mapper;
 import com.usermanagement.model.dto.UserResponse;
 import com.usermanagement.model.dto.UserUpdate;
 import com.usermanagement.model.entity.User;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
