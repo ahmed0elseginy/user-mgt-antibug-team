@@ -18,10 +18,8 @@ import jakarta.annotation.Generated;
  * UserUpdatePasswordDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T02:19:04.823758700+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T04:29:18.951974900+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
 public class UserUpdatePasswordDto {
-
-  private Integer id;
 
   private String oldPassword;
 
@@ -34,30 +32,9 @@ public class UserUpdatePasswordDto {
   /**
    * Constructor with only required parameters
    */
-  public UserUpdatePasswordDto(Integer id, String oldPassword, String newPassword) {
-    this.id = id;
+  public UserUpdatePasswordDto(String oldPassword, String newPassword) {
     this.oldPassword = oldPassword;
     this.newPassword = newPassword;
-  }
-
-  public UserUpdatePasswordDto id(Integer id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * The unique ID of the user
-   * @return id
-   */
-  @NotNull 
-  @Schema(name = "id", example = "1", description = "The unique ID of the user", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("id")
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
   }
 
   public UserUpdatePasswordDto oldPassword(String oldPassword) {
@@ -109,21 +86,19 @@ public class UserUpdatePasswordDto {
       return false;
     }
     UserUpdatePasswordDto userUpdatePasswordDto = (UserUpdatePasswordDto) o;
-    return Objects.equals(this.id, userUpdatePasswordDto.id) &&
-        Objects.equals(this.oldPassword, userUpdatePasswordDto.oldPassword) &&
+    return Objects.equals(this.oldPassword, userUpdatePasswordDto.oldPassword) &&
         Objects.equals(this.newPassword, userUpdatePasswordDto.newPassword);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, oldPassword, newPassword);
+    return Objects.hash(oldPassword, newPassword);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserUpdatePasswordDto {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    oldPassword: ").append(toIndentedString(oldPassword)).append("\n");
     sb.append("    newPassword: ").append(toIndentedString(newPassword)).append("\n");
     sb.append("}");

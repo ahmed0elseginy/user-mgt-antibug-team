@@ -3,7 +3,6 @@ package com.usermanagement.service;
 import com.usermanagement.model.dto.UserCreateDto;
 import com.usermanagement.model.dto.UserResponseDto;
 import com.usermanagement.model.dto.UserUpdateDto;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

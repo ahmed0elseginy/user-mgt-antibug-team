@@ -207,10 +207,6 @@ components:
       required:
         - id
       properties:
-        id:
-          type: integer
-          description: The unique ID of the user
-          example: 1
         userName:
           type: string
           description: The username of the user
@@ -249,10 +245,6 @@ components:
         - oldPassword
         - newPassword
       properties:
-        id:
-          type: integer
-          description: The unique ID of the user
-          example: 1
         oldPassword:
           type: string
           description: The current password of the user
@@ -301,4 +293,4 @@ components:
         status:
           type: string
           description: The account status of the user
-          example:
+          example: "ACTIVE" # Status as string

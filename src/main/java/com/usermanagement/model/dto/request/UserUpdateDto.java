@@ -18,10 +18,8 @@ import jakarta.annotation.Generated;
  * UserUpdateDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T02:19:04.823758700+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T04:29:18.951974900+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
 public class UserUpdateDto {
-
-  private Integer id;
 
   private String userName;
 
@@ -34,37 +32,6 @@ public class UserUpdateDto {
   private String password;
 
   private String status;
-
-  public UserUpdateDto() {
-    super();
-  }
-
-  /**
-   * Constructor with only required parameters
-   */
-  public UserUpdateDto(Integer id) {
-    this.id = id;
-  }
-
-  public UserUpdateDto id(Integer id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * The unique ID of the user
-   * @return id
-   */
-  @NotNull 
-  @Schema(name = "id", example = "1", description = "The unique ID of the user", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("id")
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
 
   public UserUpdateDto userName(String userName) {
     this.userName = userName;
@@ -195,8 +162,7 @@ public class UserUpdateDto {
       return false;
     }
     UserUpdateDto userUpdateDto = (UserUpdateDto) o;
-    return Objects.equals(this.id, userUpdateDto.id) &&
-        Objects.equals(this.userName, userUpdateDto.userName) &&
+    return Objects.equals(this.userName, userUpdateDto.userName) &&
         Objects.equals(this.email, userUpdateDto.email) &&
         Objects.equals(this.mobileNumber, userUpdateDto.mobileNumber) &&
         Objects.equals(this.role, userUpdateDto.role) &&
@@ -206,14 +172,13 @@ public class UserUpdateDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, userName, email, mobileNumber, role, password, status);
+    return Objects.hash(userName, email, mobileNumber, role, password, status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserUpdateDto {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    mobileNumber: ").append(toIndentedString(mobileNumber)).append("\n");

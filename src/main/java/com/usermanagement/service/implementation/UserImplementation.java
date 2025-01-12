@@ -11,7 +11,6 @@ import com.usermanagement.repository.GenderRepository;
 import com.usermanagement.repository.StatusRepository;
 import com.usermanagement.repository.UserRepository;
 import com.usermanagement.service.UserService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

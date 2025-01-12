@@ -8,6 +8,8 @@ import com.usermanagement.model.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.springframework.stereotype.Component;
+
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
