@@ -1,9 +1,8 @@
-.openapi-generator-ignore
 README.md
 com/usermanagement/controller/ApiUtil.java
 com/usermanagement/controller/UsersApi.java
-com/usermanagement/model/dto/UserCreate.java
-com/usermanagement/model/dto/UserResponse.java
-com/usermanagement/model/dto/UserUpdate.java
-com/usermanagement/model/dto/UserUpdatePassword.java
+com/usermanagement/model/dto/UserCreateDto.java
+com/usermanagement/model/dto/UserResponseDto.java
+com/usermanagement/model/dto/UserUpdateDto.java
+com/usermanagement/model/dto/UserUpdatePasswordDto.java
 pom.xml

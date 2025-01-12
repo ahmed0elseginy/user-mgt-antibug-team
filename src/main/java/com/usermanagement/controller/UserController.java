@@ -1,10 +1,12 @@
 package com.usermanagement.controller;
 
 import com.usermanagement.model.activemq.UserMessage;
-import com.usermanagement.model.dto.UserCreate;
-import com.usermanagement.model.dto.UserResponse;
-import com.usermanagement.model.dto.UserUpdate;
-import com.usermanagement.model.dto.UserUpdatePassword;
+import com.usermanagement.model.dto.UserCreateDto;
+import com.usermanagement.model.dto.UserResponseDto;
+import com.usermanagement.model.dto.UserUpdateDto;
+import com.usermanagement.model.dto.UserUpdatePasswordDto;
+import com.usermanagement.service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,50 +25,37 @@ public class UserController implements UsersApi{
 
     private final JmsTemplate jmsTemplate;
 
+    private final UserService userService;
+
     @PostMapping("/publishMessage")
     public ResponseEntity<String>publishMessage(@RequestBody UserMessage userMessage){
         jmsTemplate.convertAndSend("bridge-queue",userMessage);
         return new ResponseEntity<>("Sent", HttpStatus.OK);
     }
 
-
-
-
-
     @Override
-    public Optional<NativeWebRequest> getRequest() {
-        return UsersApi.super.getRequest();
+    public ResponseEntity<String> createUser(UserCreateDto userCreateDto) {
+       return new ResponseEntity<>(userService.addUser(userCreateDto),HttpStatus.OK) ;
+       // return UsersApi.super.createUser(userCreateDto);
     }
 
     @Override
-    public ResponseEntity<String> createUser(UserCreate userCreateDto) {
-        return UsersApi.super.createUser(userCreateDto);
-    }
-
-    @Override
-    public ResponseEntity<String> deleteUser(Integer id) {
-        return UsersApi.super.deleteUser(id);
-    }
-
-    @Override
-    public ResponseEntity<List<UserResponse>> getAllUsers() {
+    public ResponseEntity<List<UserResponseDto>> getAllUsers() {
         return UsersApi.super.getAllUsers();
     }
 
     @Override
-    public ResponseEntity<UserResponse> getUserById(Integer id) {
+    public ResponseEntity<UserResponseDto> getUserById(Integer id) {
         return UsersApi.super.getUserById(id);
     }
 
     @Override
-    public ResponseEntity<String> updateUser(Integer id, UserUpdate userUpdateDto) {
+    public ResponseEntity<String> updateUser(Integer id, UserUpdateDto userUpdateDto) {
         return UsersApi.super.updateUser(id, userUpdateDto);
     }
 
     @Override
-    public ResponseEntity<String> updateUserPassword(Integer id, UserUpdatePassword userUpdatePasswordDto) {
-        return UsersApi.super.updateUserPassword(id, userUpdatePasswordDto);
+    public ResponseEntity<String> updatePassword(Integer id, UserUpdatePasswordDto userUpdatePasswordDto) {
+        return UsersApi.super.updatePassword(id, userUpdatePasswordDto);
     }
-
-
 }

@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -16,11 +15,11 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * UserCreate
+ * UserCreateDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-06T20:29:17.437296100+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
-public class UserCreate {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T02:19:04.823758700+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+public class UserCreateDto {
 
   private String userName;
 
@@ -34,88 +33,18 @@ public class UserCreate {
 
   private String role;
 
-  /**
-   * The gender of the user
-   */
-  public enum GenderEnum {
-    MALE("MALE"),
-    
-    FEMALE("FEMALE");
+  private String gender;
 
-    private String value;
+  private String status;
 
-    GenderEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static GenderEnum fromValue(String value) {
-      for (GenderEnum b : GenderEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
-  private GenderEnum gender;
-
-  /**
-   * The status of the user account
-   */
-  public enum StatusEnum {
-    ACTIVE("ACTIVE"),
-    
-    INACTIVE("INACTIVE");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
-  private StatusEnum status;
-
-  public UserCreate() {
+  public UserCreateDto() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public UserCreate(String userName, String password, String email, String fullName, String mobileNumber, String role, GenderEnum gender, StatusEnum status) {
+  public UserCreateDto(String userName, String password, String email, String fullName, String mobileNumber, String role, String gender, String status) {
     this.userName = userName;
     this.password = password;
     this.email = email;
@@ -126,7 +55,7 @@ public class UserCreate {
     this.status = status;
   }
 
-  public UserCreate userName(String userName) {
+  public UserCreateDto userName(String userName) {
     this.userName = userName;
     return this;
   }
@@ -136,7 +65,7 @@ public class UserCreate {
    * @return userName
    */
   @NotNull @Pattern(regexp = "^[A-Za-z]+$|^[A-Za-z]+\\d+$") 
-  @Schema(name = "userName", description = "The username of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "userName", example = "JohnDoe", description = "The username of the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("userName")
   public String getUserName() {
     return userName;
@@ -146,7 +75,7 @@ public class UserCreate {
     this.userName = userName;
   }
 
-  public UserCreate password(String password) {
+  public UserCreateDto password(String password) {
     this.password = password;
     return this;
   }
@@ -156,7 +85,7 @@ public class UserCreate {
    * @return password
    */
   @NotNull @Pattern(regexp = "^[A-Za-z]+\\d{2}$") @Size(min = 5, max = 10) 
-  @Schema(name = "password", description = "The password for the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "password", example = "John12", description = "The password for the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("password")
   public String getPassword() {
     return password;
@@ -166,7 +95,7 @@ public class UserCreate {
     this.password = password;
   }
 
-  public UserCreate email(String email) {
+  public UserCreateDto email(String email) {
     this.email = email;
     return this;
   }
@@ -176,7 +105,7 @@ public class UserCreate {
    * @return email
    */
   @NotNull @jakarta.validation.constraints.Email 
-  @Schema(name = "email", description = "The email address of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "email", example = "john.doe@example.com", description = "The email address of the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("email")
   public String getEmail() {
     return email;
@@ -186,7 +115,7 @@ public class UserCreate {
     this.email = email;
   }
 
-  public UserCreate fullName(String fullName) {
+  public UserCreateDto fullName(String fullName) {
     this.fullName = fullName;
     return this;
   }
@@ -195,8 +124,8 @@ public class UserCreate {
    * The full name of the user
    * @return fullName
    */
-  @NotNull @Pattern(regexp = "[A-Za-z]+$") 
-  @Schema(name = "fullName", description = "The full name of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull 
+  @Schema(name = "fullName", example = "John Doe", description = "The full name of the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("fullName")
   public String getFullName() {
     return fullName;
@@ -206,7 +135,7 @@ public class UserCreate {
     this.fullName = fullName;
   }
 
-  public UserCreate mobileNumber(String mobileNumber) {
+  public UserCreateDto mobileNumber(String mobileNumber) {
     this.mobileNumber = mobileNumber;
     return this;
   }
@@ -216,7 +145,7 @@ public class UserCreate {
    * @return mobileNumber
    */
   @NotNull @Pattern(regexp = "^\\d{11}$") 
-  @Schema(name = "mobileNumber", description = "The mobile number of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "mobileNumber", example = "01234567890", description = "The mobile number of the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("mobileNumber")
   public String getMobileNumber() {
     return mobileNumber;
@@ -226,7 +155,7 @@ public class UserCreate {
     this.mobileNumber = mobileNumber;
   }
 
-  public UserCreate role(String role) {
+  public UserCreateDto role(String role) {
     this.role = role;
     return this;
   }
@@ -235,8 +164,8 @@ public class UserCreate {
    * The role assigned to the user
    * @return role
    */
-  @NotNull @Pattern(regexp = "[A-Za-z]+$") 
-  @Schema(name = "role", description = "The role assigned to the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull 
+  @Schema(name = "role", example = "USER", description = "The role assigned to the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("role")
   public String getRole() {
     return role;
@@ -246,7 +175,7 @@ public class UserCreate {
     this.role = role;
   }
 
-  public UserCreate gender(GenderEnum gender) {
+  public UserCreateDto gender(String gender) {
     this.gender = gender;
     return this;
   }
@@ -256,17 +185,17 @@ public class UserCreate {
    * @return gender
    */
   @NotNull 
-  @Schema(name = "gender", description = "The gender of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "gender", example = "MALE", description = "The gender of the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("gender")
-  public GenderEnum getGender() {
+  public String getGender() {
     return gender;
   }
 
-  public void setGender(GenderEnum gender) {
+  public void setGender(String gender) {
     this.gender = gender;
   }
 
-  public UserCreate status(StatusEnum status) {
+  public UserCreateDto status(String status) {
     this.status = status;
     return this;
   }
@@ -276,13 +205,13 @@ public class UserCreate {
    * @return status
    */
   @NotNull 
-  @Schema(name = "status", description = "The status of the user account", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "status", example = "ACTIVE", description = "The status of the user account", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("status")
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(StatusEnum status) {
+  public void setStatus(String status) {
     this.status = status;
   }
 
@@ -294,15 +223,15 @@ public class UserCreate {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserCreate userCreate = (UserCreate) o;
-    return Objects.equals(this.userName, userCreate.userName) &&
-        Objects.equals(this.password, userCreate.password) &&
-        Objects.equals(this.email, userCreate.email) &&
-        Objects.equals(this.fullName, userCreate.fullName) &&
-        Objects.equals(this.mobileNumber, userCreate.mobileNumber) &&
-        Objects.equals(this.role, userCreate.role) &&
-        Objects.equals(this.gender, userCreate.gender) &&
-        Objects.equals(this.status, userCreate.status);
+    UserCreateDto userCreateDto = (UserCreateDto) o;
+    return Objects.equals(this.userName, userCreateDto.userName) &&
+        Objects.equals(this.password, userCreateDto.password) &&
+        Objects.equals(this.email, userCreateDto.email) &&
+        Objects.equals(this.fullName, userCreateDto.fullName) &&
+        Objects.equals(this.mobileNumber, userCreateDto.mobileNumber) &&
+        Objects.equals(this.role, userCreateDto.role) &&
+        Objects.equals(this.gender, userCreateDto.gender) &&
+        Objects.equals(this.status, userCreateDto.status);
   }
 
   @Override
@@ -313,7 +242,7 @@ public class UserCreate {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserCreate {\n");
+    sb.append("class UserCreateDto {\n");
     sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");

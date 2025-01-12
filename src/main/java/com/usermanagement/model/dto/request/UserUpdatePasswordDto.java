@@ -15,39 +15,62 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * UserUpdatePassword
+ * UserUpdatePasswordDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-06T20:29:17.437296100+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
-public class UserUpdatePassword {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T02:19:04.823758700+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+public class UserUpdatePasswordDto {
+
+  private Integer id;
 
   private String oldPassword;
 
   private String newPassword;
 
-  public UserUpdatePassword() {
+  public UserUpdatePasswordDto() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public UserUpdatePassword(String oldPassword, String newPassword) {
+  public UserUpdatePasswordDto(Integer id, String oldPassword, String newPassword) {
+    this.id = id;
     this.oldPassword = oldPassword;
     this.newPassword = newPassword;
   }
 
-  public UserUpdatePassword oldPassword(String oldPassword) {
+  public UserUpdatePasswordDto id(Integer id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * The unique ID of the user
+   * @return id
+   */
+  @NotNull 
+  @Schema(name = "id", example = "1", description = "The unique ID of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("id")
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public UserUpdatePasswordDto oldPassword(String oldPassword) {
     this.oldPassword = oldPassword;
     return this;
   }
 
   /**
-   * The password for the user
+   * The current password of the user
    * @return oldPassword
    */
-  @NotNull @Pattern(regexp = "^[A-Za-z]+\\d{2}$") @Size(min = 5, max = 10) 
-  @Schema(name = "oldPassword", description = "The password for the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Size(min = 5, max = 10) 
+  @Schema(name = "oldPassword", example = "John12", description = "The current password of the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("oldPassword")
   public String getOldPassword() {
     return oldPassword;
@@ -57,17 +80,17 @@ public class UserUpdatePassword {
     this.oldPassword = oldPassword;
   }
 
-  public UserUpdatePassword newPassword(String newPassword) {
+  public UserUpdatePasswordDto newPassword(String newPassword) {
     this.newPassword = newPassword;
     return this;
   }
 
   /**
-   * The New Password Of The User
+   * The new password for the user
    * @return newPassword
    */
-  @NotNull @Pattern(regexp = "^[A-Za-z]+\\d{2}$") @Size(min = 5, max = 10) 
-  @Schema(name = "newPassword", description = "The New Password Of The User", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Size(min = 5, max = 10) 
+  @Schema(name = "newPassword", example = "John12New", description = "The new password for the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("newPassword")
   public String getNewPassword() {
     return newPassword;
@@ -85,20 +108,22 @@ public class UserUpdatePassword {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserUpdatePassword userUpdatePassword = (UserUpdatePassword) o;
-    return Objects.equals(this.oldPassword, userUpdatePassword.oldPassword) &&
-        Objects.equals(this.newPassword, userUpdatePassword.newPassword);
+    UserUpdatePasswordDto userUpdatePasswordDto = (UserUpdatePasswordDto) o;
+    return Objects.equals(this.id, userUpdatePasswordDto.id) &&
+        Objects.equals(this.oldPassword, userUpdatePasswordDto.oldPassword) &&
+        Objects.equals(this.newPassword, userUpdatePasswordDto.newPassword);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(oldPassword, newPassword);
+    return Objects.hash(id, oldPassword, newPassword);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserUpdatePassword {\n");
+    sb.append("class UserUpdatePasswordDto {\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    oldPassword: ").append(toIndentedString(oldPassword)).append("\n");
     sb.append("    newPassword: ").append(toIndentedString(newPassword)).append("\n");
     sb.append("}");

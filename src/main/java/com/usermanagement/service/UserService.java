@@ -1,19 +1,22 @@
 package com.usermanagement.service;
 
-import com.usermanagement.model.dto.UserResponse;
-import com.usermanagement.model.dto.UserUpdate;
-import com.usermanagement.model.entity.User;
+import com.usermanagement.model.dto.UserCreateDto;
+import com.usermanagement.model.dto.UserResponseDto;
+import com.usermanagement.model.dto.UserUpdateDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 public interface UserService {
-    public UserResponse addUser(User userDto);
 
-    public UserResponse updateUser(UserUpdate userUpdateDto);
+    public String addUser(UserCreateDto userDto);
 
-    public List<UserResponse> getAllUsers();
+    public UserResponseDto updateUser(UserUpdateDto userUpdateDto);
 
-    public UserResponse getUserById(Integer id);
+    public List<UserResponseDto> getAllUsers();
+
+    public UserResponseDto getUserById(Integer id);
 
     public String deleteUserById(Integer id);
 

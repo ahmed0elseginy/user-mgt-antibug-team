@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -16,11 +15,11 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * UserResponse
+ * UserResponseDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-06T20:29:17.437296100+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
-public class UserResponse {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T02:19:04.823758700+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+public class UserResponseDto {
 
   private Integer id;
 
@@ -34,81 +33,11 @@ public class UserResponse {
 
   private String role;
 
-  /**
-   * The gender of the user
-   */
-  public enum GenderEnum {
-    MALE("MALE"),
-    
-    FEMALE("FEMALE");
+  private String gender;
 
-    private String value;
+  private String status;
 
-    GenderEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static GenderEnum fromValue(String value) {
-      for (GenderEnum b : GenderEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
-  private GenderEnum gender;
-
-  /**
-   * The account status of the user
-   */
-  public enum StatusEnum {
-    ACTIVE("ACTIVE"),
-    
-    INACTIVE("INACTIVE");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
-  private StatusEnum status;
-
-  public UserResponse id(Integer id) {
+  public UserResponseDto id(Integer id) {
     this.id = id;
     return this;
   }
@@ -118,7 +47,7 @@ public class UserResponse {
    * @return id
    */
   
-  @Schema(name = "id", description = "The unique ID of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "id", example = "1", description = "The unique ID of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("id")
   public Integer getId() {
     return id;
@@ -128,7 +57,7 @@ public class UserResponse {
     this.id = id;
   }
 
-  public UserResponse userName(String userName) {
+  public UserResponseDto userName(String userName) {
     this.userName = userName;
     return this;
   }
@@ -138,7 +67,7 @@ public class UserResponse {
    * @return userName
    */
   
-  @Schema(name = "userName", description = "The username of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "userName", example = "JohnDoe", description = "The username of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("userName")
   public String getUserName() {
     return userName;
@@ -148,7 +77,7 @@ public class UserResponse {
     this.userName = userName;
   }
 
-  public UserResponse email(String email) {
+  public UserResponseDto email(String email) {
     this.email = email;
     return this;
   }
@@ -158,7 +87,7 @@ public class UserResponse {
    * @return email
    */
   @jakarta.validation.constraints.Email 
-  @Schema(name = "email", description = "The email address of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "email", example = "john.doe@example.com", description = "The email address of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("email")
   public String getEmail() {
     return email;
@@ -168,7 +97,7 @@ public class UserResponse {
     this.email = email;
   }
 
-  public UserResponse fullName(String fullName) {
+  public UserResponseDto fullName(String fullName) {
     this.fullName = fullName;
     return this;
   }
@@ -178,7 +107,7 @@ public class UserResponse {
    * @return fullName
    */
   
-  @Schema(name = "fullName", description = "The full name of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "fullName", example = "John Doe", description = "The full name of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("fullName")
   public String getFullName() {
     return fullName;
@@ -188,7 +117,7 @@ public class UserResponse {
     this.fullName = fullName;
   }
 
-  public UserResponse mobileNumber(String mobileNumber) {
+  public UserResponseDto mobileNumber(String mobileNumber) {
     this.mobileNumber = mobileNumber;
     return this;
   }
@@ -198,7 +127,7 @@ public class UserResponse {
    * @return mobileNumber
    */
   
-  @Schema(name = "mobileNumber", description = "The mobile number of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "mobileNumber", example = "01234567890", description = "The mobile number of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("mobileNumber")
   public String getMobileNumber() {
     return mobileNumber;
@@ -208,7 +137,7 @@ public class UserResponse {
     this.mobileNumber = mobileNumber;
   }
 
-  public UserResponse role(String role) {
+  public UserResponseDto role(String role) {
     this.role = role;
     return this;
   }
@@ -218,7 +147,7 @@ public class UserResponse {
    * @return role
    */
   
-  @Schema(name = "role", description = "The role of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "role", example = "USER", description = "The role of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("role")
   public String getRole() {
     return role;
@@ -228,7 +157,7 @@ public class UserResponse {
     this.role = role;
   }
 
-  public UserResponse gender(GenderEnum gender) {
+  public UserResponseDto gender(String gender) {
     this.gender = gender;
     return this;
   }
@@ -238,17 +167,17 @@ public class UserResponse {
    * @return gender
    */
   
-  @Schema(name = "gender", description = "The gender of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "gender", example = "MALE", description = "The gender of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("gender")
-  public GenderEnum getGender() {
+  public String getGender() {
     return gender;
   }
 
-  public void setGender(GenderEnum gender) {
+  public void setGender(String gender) {
     this.gender = gender;
   }
 
-  public UserResponse status(StatusEnum status) {
+  public UserResponseDto status(String status) {
     this.status = status;
     return this;
   }
@@ -258,13 +187,13 @@ public class UserResponse {
    * @return status
    */
   
-  @Schema(name = "status", description = "The account status of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "status", example = "ACTIVE", description = "The account status of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("status")
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(StatusEnum status) {
+  public void setStatus(String status) {
     this.status = status;
   }
 
@@ -276,15 +205,15 @@ public class UserResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserResponse userResponse = (UserResponse) o;
-    return Objects.equals(this.id, userResponse.id) &&
-        Objects.equals(this.userName, userResponse.userName) &&
-        Objects.equals(this.email, userResponse.email) &&
-        Objects.equals(this.fullName, userResponse.fullName) &&
-        Objects.equals(this.mobileNumber, userResponse.mobileNumber) &&
-        Objects.equals(this.role, userResponse.role) &&
-        Objects.equals(this.gender, userResponse.gender) &&
-        Objects.equals(this.status, userResponse.status);
+    UserResponseDto userResponseDto = (UserResponseDto) o;
+    return Objects.equals(this.id, userResponseDto.id) &&
+        Objects.equals(this.userName, userResponseDto.userName) &&
+        Objects.equals(this.email, userResponseDto.email) &&
+        Objects.equals(this.fullName, userResponseDto.fullName) &&
+        Objects.equals(this.mobileNumber, userResponseDto.mobileNumber) &&
+        Objects.equals(this.role, userResponseDto.role) &&
+        Objects.equals(this.gender, userResponseDto.gender) &&
+        Objects.equals(this.status, userResponseDto.status);
   }
 
   @Override
@@ -295,7 +224,7 @@ public class UserResponse {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserResponse {\n");
+    sb.append("class UserResponseDto {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");

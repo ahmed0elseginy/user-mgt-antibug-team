@@ -5,10 +5,10 @@
  */
 package com.usermanagement.controller;
 
-import com.usermanagement.model.dto.UserCreate;
-import com.usermanagement.model.dto.UserResponse;
-import com.usermanagement.model.dto.UserUpdate;
-import com.usermanagement.model.dto.UserUpdatePassword;
+import com.usermanagement.model.dto.UserCreateDto;
+import com.usermanagement.model.dto.UserResponseDto;
+import com.usermanagement.model.dto.UserUpdateDto;
+import com.usermanagement.model.dto.UserUpdatePasswordDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-06T20:29:17.437296100+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T02:19:04.823758700+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
 @Validated
 @Tag(name = "User Management", description = "the User Management API")
 public interface UsersApi {
@@ -47,7 +47,7 @@ public interface UsersApi {
     /**
      * POST /users : Create a new user
      *
-     * @param userCreate Details of the new user to create (required)
+     * @param userCreateDto Details of the new user to create (required)
      * @return User created successfully (status code 200)
      */
     @Operation(
@@ -68,51 +68,12 @@ public interface UsersApi {
     )
     
     default ResponseEntity<String> createUser(
-        @Parameter(name = "UserCreate", description = "Details of the new user to create", required = true) @Valid @RequestBody UserCreate userCreate
+        @Parameter(name = "UserCreateDto", description = "Details of the new user to create", required = true) @Valid @RequestBody UserCreateDto userCreateDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "\"User Added successfully.\"";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * DELETE /users/{id} : Delete a user by ID
-     *
-     * @param id The unique ID of the user (required)
-     * @return User deleted successfully (status code 200)
-     */
-    @Operation(
-        operationId = "deleteUser",
-        summary = "Delete a user by ID",
-        tags = { "User Management" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "User deleted successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/users/{id}",
-        produces = { "application/json" }
-    )
-    
-    default ResponseEntity<String> deleteUser(
-        @Parameter(name = "id", description = "The unique ID of the user", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "\"User deleted successfully.\"";
+                    String exampleString = "\"User added successfully.\"";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -134,7 +95,7 @@ public interface UsersApi {
         tags = { "User Management" },
         responses = {
             @ApiResponse(responseCode = "200", description = "A list of all users", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)))
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UserResponseDto.class)))
             })
         }
     )
@@ -144,13 +105,13 @@ public interface UsersApi {
         produces = { "application/json" }
     )
     
-    default ResponseEntity<List<UserResponse>> getAllUsers(
+    default ResponseEntity<List<UserResponseDto>> getAllUsers(
         
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"role\" : \"role\", \"gender\" : \"MALE\", \"mobileNumber\" : \"mobileNumber\", \"fullName\" : \"fullName\", \"id\" : 0, \"userName\" : \"userName\", \"email\" : \"email\", \"status\" : \"ACTIVE\" }, { \"role\" : \"role\", \"gender\" : \"MALE\", \"mobileNumber\" : \"mobileNumber\", \"fullName\" : \"fullName\", \"id\" : 0, \"userName\" : \"userName\", \"email\" : \"email\", \"status\" : \"ACTIVE\" } ]";
+                    String exampleString = "[ { \"role\" : \"USER\", \"gender\" : \"MALE\", \"mobileNumber\" : \"01234567890\", \"fullName\" : \"John Doe\", \"id\" : 1, \"userName\" : \"JohnDoe\", \"email\" : \"john.doe@example.com\", \"status\" : \"ACTIVE\" }, { \"role\" : \"USER\", \"gender\" : \"MALE\", \"mobileNumber\" : \"01234567890\", \"fullName\" : \"John Doe\", \"id\" : 1, \"userName\" : \"JohnDoe\", \"email\" : \"john.doe@example.com\", \"status\" : \"ACTIVE\" } ]";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -173,7 +134,7 @@ public interface UsersApi {
         tags = { "User Management" },
         responses = {
             @ApiResponse(responseCode = "200", description = "User details retrieved successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))
             })
         }
     )
@@ -183,13 +144,55 @@ public interface UsersApi {
         produces = { "application/json" }
     )
     
-    default ResponseEntity<UserResponse> getUserById(
+    default ResponseEntity<UserResponseDto> getUserById(
         @Parameter(name = "id", description = "The unique ID of the user", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"role\" : \"role\", \"gender\" : \"MALE\", \"mobileNumber\" : \"mobileNumber\", \"fullName\" : \"fullName\", \"id\" : 0, \"userName\" : \"userName\", \"email\" : \"email\", \"status\" : \"ACTIVE\" }";
+                    String exampleString = "{ \"role\" : \"USER\", \"gender\" : \"MALE\", \"mobileNumber\" : \"01234567890\", \"fullName\" : \"John Doe\", \"id\" : 1, \"userName\" : \"JohnDoe\", \"email\" : \"john.doe@example.com\", \"status\" : \"ACTIVE\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * PUT /users/{id}/updatePassword : Update password for a user
+     *
+     * @param id The unique ID of the user whose password is to be updated (required)
+     * @param userUpdatePasswordDto Request body for updating the password (required)
+     * @return Password updated successfully (status code 200)
+     */
+    @Operation(
+        operationId = "updatePassword",
+        summary = "Update password for a user",
+        tags = { "User Management" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Password updated successfully", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.PUT,
+        value = "/users/{id}/updatePassword",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    
+    default ResponseEntity<String> updatePassword(
+        @Parameter(name = "id", description = "The unique ID of the user whose password is to be updated", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id,
+        @Parameter(name = "UserUpdatePasswordDto", description = "Request body for updating the password", required = true) @Valid @RequestBody UserUpdatePasswordDto userUpdatePasswordDto
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "\"Password updated successfully.\"";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -204,7 +207,7 @@ public interface UsersApi {
      * PUT /users/{id} : Update an existing user
      *
      * @param id The unique ID of the user (required)
-     * @param userUpdate Updated details of the user (required)
+     * @param userUpdateDto Updated details of the user (required)
      * @return User updated successfully (status code 200)
      */
     @Operation(
@@ -226,54 +229,12 @@ public interface UsersApi {
     
     default ResponseEntity<String> updateUser(
         @Parameter(name = "id", description = "The unique ID of the user", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id,
-        @Parameter(name = "UserUpdate", description = "Updated details of the user", required = true) @Valid @RequestBody UserUpdate userUpdate
+        @Parameter(name = "UserUpdateDto", description = "Updated details of the user", required = true) @Valid @RequestBody UserUpdateDto userUpdateDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "\"User Updated successfully.\"";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * PUT /users/{id}/passwordupdate : Update password  of an existing user
-     *
-     * @param id The unique ID of the user (required)
-     * @param userUpdatePassword Updated Password of the user (required)
-     * @return User Password updated successfully (status code 200)
-     */
-    @Operation(
-        operationId = "updateUserPassword",
-        summary = "Update password  of an existing user",
-        tags = { "User Management" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "User Password updated successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/users/{id}/passwordupdate",
-        produces = { "application/json" },
-        consumes = { "application/json" }
-    )
-    
-    default ResponseEntity<String> updateUserPassword(
-        @Parameter(name = "id", description = "The unique ID of the user", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id,
-        @Parameter(name = "UserUpdatePassword", description = "Updated Password of the user", required = true) @Valid @RequestBody UserUpdatePassword userUpdatePassword
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "\"User Password Updated successfully.\"";
+                    String exampleString = "\"User updated successfully.\"";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

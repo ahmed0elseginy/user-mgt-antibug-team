@@ -3,23 +3,31 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet id="create-user-table" author="admin">
+
+    <!-- Create the status table -->
+    <changeSet id="create-status-table" author="admin">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="user"/>
+                <tableExists tableName="status"/>
             </not>
         </preConditions>
-        <createTable tableName="user">
+        <createTable tableName="status">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="user_name" type="VARCHAR(255)" />
-            <column name="email" type="VARCHAR(255)" />
-            <column name="password" type="VARCHAR(255)" />
-            <column name="full_name" type="VARCHAR(255)" />
-            <column name="mobile_number" type="VARCHAR(255)" />
-            <column name="role" type="VARCHAR(255)" />
-            <column name="gender" type="VARCHAR(255)" />
+            <column name="status" type="VARCHAR(255)" />
         </createTable>
     </changeSet>
+
+    <changeSet id="2" author="admin">
+        <insert tableName="status">
+            <column name="id" value="1"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+        <insert tableName="status">
+            <column name="id" value="2"/>
+            <column name="status" value="INACTIVE"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
