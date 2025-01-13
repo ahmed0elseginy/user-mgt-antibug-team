@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * UserUpdateDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T04:29:18.951974900+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-13T01:57:03.575975400+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
 public class UserUpdateDto {
 
   private String userName;
@@ -42,7 +42,7 @@ public class UserUpdateDto {
    * The username of the user
    * @return userName
    */
-  @Pattern(regexp = "^[A-Za-z]+$|^[A-Za-z]+\\d+$") 
+  @Pattern(regexp = "^[A-Za-z][A-Za-z0-9]*$") 
   @Schema(name = "userName", example = "JohnDoeUpdated", description = "The username of the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("userName")
   public String getUserName() {
@@ -119,11 +119,11 @@ public class UserUpdateDto {
   }
 
   /**
-   * The password for the user
+   * Get password
    * @return password
    */
-  @Pattern(regexp = "^[A-Za-z]+\\d{2}$") @Size(min = 5, max = 10) 
-  @Schema(name = "password", example = "John12New", description = "The password for the user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Pattern(regexp = "^\\w+\\d{2}$") @Size(min = 5, max = 10) 
+  @Schema(name = "password", example = "John12", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("password")
   public String getPassword() {
     return password;
@@ -142,7 +142,7 @@ public class UserUpdateDto {
    * The status of the user account
    * @return status
    */
-  
+  @Pattern(regexp = "^(ACTIVE|INACTIVE)$") 
   @Schema(name = "status", example = "INACTIVE", description = "The status of the user account", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("status")
   public String getStatus() {

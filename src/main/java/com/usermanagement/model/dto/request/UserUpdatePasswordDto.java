@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * UserUpdatePasswordDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T04:29:18.951974900+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-13T01:57:03.575975400+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
 public class UserUpdatePasswordDto {
 
   private String oldPassword;
@@ -43,11 +43,11 @@ public class UserUpdatePasswordDto {
   }
 
   /**
-   * The current password of the user
+   * The old password for the user
    * @return oldPassword
    */
-  @NotNull @Size(min = 5, max = 10) 
-  @Schema(name = "oldPassword", example = "John12", description = "The current password of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull 
+  @Schema(name = "oldPassword", example = "John12", description = "The old password for the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("oldPassword")
   public String getOldPassword() {
     return oldPassword;
@@ -63,11 +63,11 @@ public class UserUpdatePasswordDto {
   }
 
   /**
-   * The new password for the user
+   * Get newPassword
    * @return newPassword
    */
-  @NotNull @Size(min = 5, max = 10) 
-  @Schema(name = "newPassword", example = "John12New", description = "The new password for the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^\\w+\\d{2}$") @Size(min = 5, max = 10) 
+  @Schema(name = "newPassword", example = "Johnsd12", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("newPassword")
   public String getNewPassword() {
     return newPassword;

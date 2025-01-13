@@ -1,6 +1,8 @@
 README.md
 com/usermanagement/controller/ApiUtil.java
+com/usermanagement/controller/PublishMessageApi.java
 com/usermanagement/controller/UsersApi.java
+com/usermanagement/model/dto/PublishMessageDto.java
 com/usermanagement/model/dto/UserCreateDto.java
 com/usermanagement/model/dto/UserResponseDto.java
 com/usermanagement/model/dto/UserUpdateDto.java

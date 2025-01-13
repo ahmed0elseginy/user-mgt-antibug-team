@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * UserCreateDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T04:29:18.951974900+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-13T01:57:03.575975400+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
 public class UserCreateDto {
 
   private String userName;
@@ -64,7 +64,7 @@ public class UserCreateDto {
    * The username of the user
    * @return userName
    */
-  @NotNull @Pattern(regexp = "^[A-Za-z]+$|^[A-Za-z]+\\d+$") 
+  @NotNull @Pattern(regexp = "^[A-Za-z][A-Za-z0-9]*$") 
   @Schema(name = "userName", example = "JohnDoe", description = "The username of the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("userName")
   public String getUserName() {
@@ -81,11 +81,11 @@ public class UserCreateDto {
   }
 
   /**
-   * The password for the user
+   * Get password
    * @return password
    */
-  @NotNull @Pattern(regexp = "^[A-Za-z]+\\d{2}$") @Size(min = 5, max = 10) 
-  @Schema(name = "password", example = "John12", description = "The password for the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^\\w+\\d{2}$") @Size(min = 5, max = 10) 
+  @Schema(name = "password", example = "John12", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("password")
   public String getPassword() {
     return password;
@@ -124,7 +124,7 @@ public class UserCreateDto {
    * The full name of the user
    * @return fullName
    */
-  @NotNull 
+  @NotNull @Pattern(regexp = "^[A-Za-z ]+$") 
   @Schema(name = "fullName", example = "John Doe", description = "The full name of the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("fullName")
   public String getFullName() {
@@ -141,11 +141,11 @@ public class UserCreateDto {
   }
 
   /**
-   * The mobile number of the user
+   * The mobile number of the user (11 digits)
    * @return mobileNumber
    */
   @NotNull @Pattern(regexp = "^\\d{11}$") 
-  @Schema(name = "mobileNumber", example = "01234567890", description = "The mobile number of the user", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "mobileNumber", example = "01234567890", description = "The mobile number of the user (11 digits)", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("mobileNumber")
   public String getMobileNumber() {
     return mobileNumber;
@@ -184,7 +184,7 @@ public class UserCreateDto {
    * The gender of the user
    * @return gender
    */
-  @NotNull 
+  @NotNull @Pattern(regexp = "^(MALE|FEMALE)$") 
   @Schema(name = "gender", example = "MALE", description = "The gender of the user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("gender")
   public String getGender() {
@@ -204,7 +204,7 @@ public class UserCreateDto {
    * The status of the user account
    * @return status
    */
-  @NotNull 
+  @NotNull @Pattern(regexp = "^(ACTIVE|INACTIVE)$") 
   @Schema(name = "status", example = "ACTIVE", description = "The status of the user account", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("status")
   public String getStatus() {

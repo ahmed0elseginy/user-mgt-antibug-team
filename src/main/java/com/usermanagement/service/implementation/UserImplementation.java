@@ -29,25 +29,27 @@ public class UserImplementation implements UserService {
 
     private final UserMapper userMapper;
 
+
     @Override
     public String addUser(UserCreateDto userDto) {
 
         Optional<Gender> gender=genderRepository.findByGender(userDto.getGender());
         Optional<Status> status=statusRepository.findByStatus(userDto.getStatus());
 
-        User user =new User();
+
+        User insertedUser=null;
         if(gender.isPresent() && status.isPresent()){
+            User user=userMapper.UserDtoMapToUser(userDto, new User());
             user.setGender(gender.get());
             user.setStatus(status.get());
+             insertedUser=userRepository.save(user);
+        }
+        if(insertedUser!=null){
+            return "User added successfully";
+        }else{
+            return "Something went wrong";
         }
 
-        User insertedUser=userRepository.save(userMapper.UserDtoMapToUser(userDto,user));
-
-        if (insertedUser!=null){
-            return "User created successfully";
-        }
-
-        return "Something went wrong";
     }
 
     @Override

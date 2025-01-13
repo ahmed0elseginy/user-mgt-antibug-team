@@ -1,13 +1,37 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
   title: User Management API
-  description: API specification for managing users in Zag Systems, providing endpoints for user creation, retrieval, update, and deletion.
+  description: API specification for managing users in Zag Systems, providing endpoints for user creation, retrieval, update, deletion, and message publishing.
   version: 1.0.0
 servers:
   - url: 'http://localhost:8000/'
     description: Local development server
 
 paths:
+  /publishMessage:
+    post:
+      summary: Publish a message
+      operationId: publishMessage
+      tags:
+        - Messaging
+      requestBody:
+        description: Message details to be published
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishMessageDto'
+      responses:
+        '200':
+          description: Message published successfully
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Sent"
+        '400':
+          description: Invalid input
+
   /users:
     post:
       tags:
@@ -30,8 +54,8 @@ paths:
                   fullName: "John Doe"
                   mobileNumber: "01234567890"
                   role: "USER"
-                  gender: "MALE"  # Example for gender as string
-                  status: "ACTIVE"  # Example for status as string
+                  gender: "MALE"
+                  status: "ACTIVE"
       responses:
         '200':
           description: User created successfully
@@ -40,6 +64,9 @@ paths:
               schema:
                 type: string
                 example: "User added successfully."
+        '400':
+          description: Invalid input
+
     get:
       tags:
         - User Management
@@ -75,6 +102,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponseDto'
+        '404':
+          description: User not found
 
     put:
       tags:
@@ -98,13 +127,12 @@ paths:
             examples:
               example1:
                 value:
-                  id: 1
                   userName: "JohnDoeUpdated"
                   email: "john.updated@example.com"
                   mobileNumber: "01234567891"
                   role: "ADMIN"
-                  password: "John12New"
-                  status: "INACTIVE"  # Updated status as string
+                  password: "John12"
+                  status: "INACTIVE"
       responses:
         '200':
           description: User updated successfully
@@ -113,6 +141,10 @@ paths:
               schema:
                 type: string
                 example: "User updated successfully."
+        '400':
+          description: Invalid input
+        '404':
+          description: User not found
 
   /users/{id}/updatePassword:
     put:
@@ -137,9 +169,8 @@ paths:
             examples:
               example1:
                 value:
-                  id: 1
                   oldPassword: "John12"
-                  newPassword: "John12New"
+                  newPassword: "Johnsd12"
       responses:
         '200':
           description: Password updated successfully
@@ -148,9 +179,27 @@ paths:
               schema:
                 type: string
                 example: "Password updated successfully."
+        '400':
+          description: Invalid input
+        '404':
+          description: User not found
 
 components:
   schemas:
+    PublishMessageDto:
+      type: object
+      required:
+        - source
+        - message
+      properties:
+        source:
+          type: string
+          description: The source of the message
+          example: "Admin"
+        message:
+          type: string
+          description: The message content
+          example: "This is a test message."
     UserCreateDto:
       type: object
       required:
@@ -166,14 +215,13 @@ components:
         userName:
           type: string
           description: The username of the user
-          pattern: "^[A-Za-z]+$|^[A-Za-z]+\\d+$"
+          pattern: "^[A-Za-z][A-Za-z0-9]*$"
           example: "JohnDoe"
         password:
           type: string
-          description: The password for the user
+          pattern: "^\\w+\\d{2}$"
           minLength: 5
           maxLength: 10
-          pattern: "^[A-Za-z]+\\d{2}$"
           example: "John12"
         email:
           type: string
@@ -183,10 +231,11 @@ components:
         fullName:
           type: string
           description: The full name of the user
+          pattern: "^[A-Za-z ]+$"
           example: "John Doe"
         mobileNumber:
           type: string
-          description: The mobile number of the user
+          description: The mobile number of the user (11 digits)
           pattern: "^\\d{11}$"
           example: "01234567890"
         role:
@@ -196,68 +245,13 @@ components:
         gender:
           type: string
           description: The gender of the user
-          example: "MALE"  # Gender as string, not enum
+          pattern: "^(MALE|FEMALE)$"
+          example: "MALE"
         status:
           type: string
           description: The status of the user account
-          example: "ACTIVE"  # Status as string, not enum
-
-    UserUpdateDto:
-      type: object
-      required:
-        - id
-      properties:
-        userName:
-          type: string
-          description: The username of the user
-          pattern: "^[A-Za-z]+$|^[A-Za-z]+\\d+$"
-          example: "JohnDoeUpdated"
-        email:
-          type: string
-          description: The email address of the user
-          format: email
-          example: "john.updated@example.com"
-        mobileNumber:
-          type: string
-          description: The mobile number of the user
-          pattern: "^\\d{11}$"
-          example: "01234567891"
-        role:
-          type: string
-          description: The role assigned to the user
-          example: "ADMIN"
-        password:
-          type: string
-          description: The password for the user
-          minLength: 5
-          maxLength: 10
-          pattern: "^[A-Za-z]+\\d{2}$"
-          example: "John12New"
-        status:
-          type: string
-          description: The status of the user account
-          example: "INACTIVE"  # Updated status as string
-
-    UserUpdatePasswordDto:
-      type: object
-      required:
-        - id
-        - oldPassword
-        - newPassword
-      properties:
-        oldPassword:
-          type: string
-          description: The current password of the user
-          minLength: 5
-          maxLength: 10
-          example: "John12"
-        newPassword:
-          type: string
-          description: The new password for the user
-          minLength: 5
-          maxLength: 10
-          example: "John12New"
-
+          pattern: "^(ACTIVE|INACTIVE)$"
+          example: "ACTIVE"
     UserResponseDto:
       type: object
       properties:
@@ -289,8 +283,57 @@ components:
         gender:
           type: string
           description: The gender of the user
-          example: "MALE"  # Gender as string
+          example: "MALE"
         status:
           type: string
           description: The account status of the user
-          example: "ACTIVE" # Status as string
+          example: "ACTIVE"
+    UserUpdateDto:
+      type: object
+      properties:
+        userName:
+          type: string
+          description: The username of the user
+          pattern: "^[A-Za-z][A-Za-z0-9]*$"
+          example: "JohnDoeUpdated"
+        email:
+          type: string
+          description: The email address of the user
+          format: email
+          example: "john.updated@example.com"
+        mobileNumber:
+          type: string
+          description: The mobile number of the user
+          pattern: "^\\d{11}$"
+          example: "01234567891"
+        role:
+          type: string
+          description: The role assigned to the user
+          example: "ADMIN"
+        password:
+          type: string
+          pattern: "^\\w+\\d{2}$"
+          minLength: 5
+          maxLength: 10
+          example: "John12"
+        status:
+          type: string
+          description: The status of the user account
+          pattern: "^(ACTIVE|INACTIVE)$"
+          example: "INACTIVE"
+    UserUpdatePasswordDto:
+      type: object
+      required:
+        - oldPassword
+        - newPassword
+      properties:
+        oldPassword:
+          type: string
+          description: The old password for the user
+          example: "John12"
+        newPassword:
+          type: string
+          pattern: "^\\w+\\d{2}$"
+          minLength: 5
+          maxLength: 10
+          example: "Johnsd12"

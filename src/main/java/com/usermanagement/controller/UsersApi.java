@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-12T04:29:18.951974900+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-13T01:57:03.575975400+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
 @Validated
 @Tag(name = "User Management", description = "the User Management API")
 public interface UsersApi {
@@ -49,6 +49,7 @@ public interface UsersApi {
      *
      * @param userCreateDto Details of the new user to create (required)
      * @return User created successfully (status code 200)
+     *         or Invalid input (status code 400)
      */
     @Operation(
         operationId = "createUser",
@@ -57,7 +58,8 @@ public interface UsersApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "User created successfully", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
-            })
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid input")
         }
     )
     @RequestMapping(
@@ -127,6 +129,7 @@ public interface UsersApi {
      *
      * @param id The unique ID of the user (required)
      * @return User details retrieved successfully (status code 200)
+     *         or User not found (status code 404)
      */
     @Operation(
         operationId = "getUserById",
@@ -135,7 +138,8 @@ public interface UsersApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "User details retrieved successfully", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))
-            })
+            }),
+            @ApiResponse(responseCode = "404", description = "User not found")
         }
     )
     @RequestMapping(
@@ -167,6 +171,8 @@ public interface UsersApi {
      * @param id The unique ID of the user whose password is to be updated (required)
      * @param userUpdatePasswordDto Request body for updating the password (required)
      * @return Password updated successfully (status code 200)
+     *         or Invalid input (status code 400)
+     *         or User not found (status code 404)
      */
     @Operation(
         operationId = "updatePassword",
@@ -175,7 +181,9 @@ public interface UsersApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "Password updated successfully", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
-            })
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "404", description = "User not found")
         }
     )
     @RequestMapping(
@@ -209,6 +217,8 @@ public interface UsersApi {
      * @param id The unique ID of the user (required)
      * @param userUpdateDto Updated details of the user (required)
      * @return User updated successfully (status code 200)
+     *         or Invalid input (status code 400)
+     *         or User not found (status code 404)
      */
     @Operation(
         operationId = "updateUser",
@@ -217,7 +227,9 @@ public interface UsersApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "User updated successfully", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
-            })
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "404", description = "User not found")
         }
     )
     @RequestMapping(
