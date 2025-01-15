@@ -9,6 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 public class ZagSystemApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(ZagSystemApplication.class, args);
+
     }
 }

@@ -1,9 +1,10 @@
 package com.usermanagement.controller;
 
+import com.usermanagement.model.dto.*;
 import com.usermanagement.model.dto.UserCreateDto;
 import com.usermanagement.model.dto.UserResponseDto;
-import com.usermanagement.model.dto.UserUpdatePasswordDto;
 import com.usermanagement.model.dto.UserUpdateDto;
+import com.usermanagement.model.dto.UserUpdatePasswordDto;
 import com.usermanagement.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -45,16 +46,16 @@ public class UserController implements UsersApi {
         return new ResponseEntity<>(userService.getUserById(id),HttpStatus.OK);
     }
 
-    // TODO: Add Swagger annotations for API documentation in this method please !!🙂
-    public ResponseEntity<String> deleteUserById(Integer id) {
-        return new ResponseEntity<>(userService.deleteUserById(id),HttpStatus.OK);
-    }
-
     @Override
     public ResponseEntity<String> updatePassword(Integer id, UserUpdatePasswordDto userUpdatePasswordDto) {
         return new ResponseEntity<>(userService.updatePassword(id, userUpdatePasswordDto),HttpStatus.OK);
     }
 
+
+    @Override
+    public ResponseEntity<String> deleteUserById(Integer id) {
+        return new ResponseEntity<>(userService.deleteUserById(id),HttpStatus.OK);
+    }
 
 //    @PostMapping("publishMessages")
 //    public ResponseEntity<String>publishMessage(@RequestBody UserMessage userMessage){

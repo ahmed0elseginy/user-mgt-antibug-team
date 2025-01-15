@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * UserUpdateDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-15T02:59:16.236649300+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-15T14:10:38.099806100+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
 public class UserUpdateDto {
 
   private String userName;

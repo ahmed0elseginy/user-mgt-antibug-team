@@ -146,6 +146,34 @@ paths:
         '404':
           description: User not found
 
+    delete:
+      tags:
+        - User Management
+      summary: Delete a user by ID
+      operationId: deleteUserById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique ID of the user to delete
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User deleted successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: User deleted successfully
+        '404':
+          description: User not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: User not found
+
   /users/{id}/updatePassword:
     put:
       tags:

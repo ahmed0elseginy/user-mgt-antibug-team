@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 @Data
 @NoArgsConstructor
@@ -26,13 +27,12 @@ public class User {
     private String mobileNumber;
     private String role;
 
-    @ManyToOne
+    @OneToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     @JoinColumn(name = "gender_id")
     private Gender gender;
 
-    @ManyToOne
+    @OneToOne(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
     private Status status;
-
 
 }

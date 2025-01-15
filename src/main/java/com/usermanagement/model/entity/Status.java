@@ -18,4 +18,5 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Ensure this annotation is present
     private Long id;
     private String status;
+
 }

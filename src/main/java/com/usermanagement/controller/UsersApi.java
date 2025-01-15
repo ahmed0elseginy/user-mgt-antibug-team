@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-15T02:59:16.236649300+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-15T14:10:38.099806100+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
 @Validated
 @Tag(name = "User Management", description = "the User Management API")
 public interface UsersApi {
@@ -77,6 +77,54 @@ public interface UsersApi {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "\"User added successfully.\"";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * DELETE /users/{id} : Delete a user by ID
+     *
+     * @param id The unique ID of the user to delete (required)
+     * @return User deleted successfully (status code 200)
+     *         or User not found (status code 404)
+     */
+    @Operation(
+        operationId = "deleteUserById",
+        summary = "Delete a user by ID",
+        tags = { "User Management" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "User deleted successfully", content = {
+                @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "User not found", content = {
+                @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class))
+            })
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.DELETE,
+        value = "/users/{id}",
+        produces = { "text/plain" }
+    )
+    
+    default ResponseEntity<String> deleteUserById(
+        @Parameter(name = "id", description = "The unique ID of the user to delete", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
                     break;
                 }
             }
