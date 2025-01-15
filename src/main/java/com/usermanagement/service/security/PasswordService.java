@@ -1,6 +1,7 @@
 package com.usermanagement.service.security;
 
 import org.mindrot.jbcrypt.BCrypt;
+
 import org.springframework.stereotype.Component;
 
 @Component

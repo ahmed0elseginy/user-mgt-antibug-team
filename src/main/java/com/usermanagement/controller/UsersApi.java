@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-15T14:10:38.099806100+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-15T16:27:25.988137400+02:00[Africa/Cairo]", comments = "Generator version: 7.10.0")
 @Validated
 @Tag(name = "User Management", description = "the User Management API")
 public interface UsersApi {
@@ -49,7 +49,7 @@ public interface UsersApi {
      *
      * @param userCreateDto Details of the new user to create (required)
      * @return User created successfully (status code 200)
-     *         or Invalid input (status code 400)
+     *         or User not found (status code 404)
      */
     @Operation(
         operationId = "createUser",
@@ -57,15 +57,17 @@ public interface UsersApi {
         tags = { "User Management" },
         responses = {
             @ApiResponse(responseCode = "200", description = "User created successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+                @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Invalid input")
+            @ApiResponse(responseCode = "404", description = "User not found", content = {
+                @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class))
+            })
         }
     )
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/users",
-        produces = { "application/json" },
+        produces = { "text/plain" },
         consumes = { "application/json" }
     )
     
@@ -74,9 +76,14 @@ public interface UsersApi {
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "\"User added successfully.\"";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
                     break;
                 }
             }

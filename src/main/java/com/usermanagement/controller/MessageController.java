@@ -29,4 +29,5 @@ public class MessageController implements PublishMessageApi{
     public Optional<NativeWebRequest> getRequest() {
         return PublishMessageApi.super.getRequest();
     }
+
 }

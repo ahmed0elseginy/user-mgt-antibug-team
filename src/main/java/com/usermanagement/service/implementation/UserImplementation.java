@@ -67,10 +67,10 @@ public class UserImplementation implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with ID " + id + " not found."));
         userMapper.UpdateUserDtoMapToUser(userUpdateDto, user);
-
         // Use the existing hashPassword method for password hashing
         String hashedPassword = passwordService.hashPassword(userUpdateDto.getPassword());
         user.setPassword(hashedPassword);
+
         User updatedUser = userRepository.save(user);
         return userMapper.userMapToUserResponseDto(updatedUser);
 
@@ -87,9 +87,11 @@ public class UserImplementation implements UserService {
     public String updatePassword(Integer id , UserUpdatePasswordDto userUpdatePasswordDto){
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
+
         if (!passwordService.verifyPassword(userUpdatePasswordDto.getOldPassword(), user.getPassword())) {
             throw new PasswordMismatchException("Old password does not match");
         }
+
         user.setPassword(passwordService.hashPassword(userUpdatePasswordDto.getNewPassword()));
         userRepository.save(user);
         return "Password updated successfully";
@@ -117,14 +119,13 @@ public class UserImplementation implements UserService {
     }
 
 
-    //TODO Best practices here
     @Override
     public UserResponseDto getUserById(Integer id) {
         Optional<User> user = userRepository.findById(id);
         return user.map(userMapper::userMapToUserResponseDto).orElse(null);
     }
 
-    //TODO Best practices here
+
     @Override
     public String deleteUserById(Integer id) {
         if (userRepository.existsById(id)) {
