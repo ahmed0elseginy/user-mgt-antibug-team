@@ -1,3 +1,11 @@
+
+Important note:
+    " Please note that Docker is used to run both ActiveMQ and MySQL in this setup.
+    The MySQL database can be accessed through the URL: (jdbc:mysql://localhost:3307/usermanagement). *
+    For ActiveMQ, the broker URL is configured as (spring.activemq.broker-url=tcp://localhost:61616). *
+    Make sure the corresponding ports are mapped correctly for proper communication with these services."
+Best regards, Ahmed 🙂😂
+
 -- Build Best structure project                   -Done
 
 - Generate a code from Swagger bre implementation - *
@@ -9,22 +17,20 @@
     -add validation for api        -Done
     -Update Classes in DTO (Request , Response)      - Done
 
-
 - liquibase                                      - Done
     -Use liquibase and implement files           - Done
-    -Relation between tables(Genders ,Statuses,Users) ********************
+    -Relation between tables(Genders ,Statuses,Users) ******************** Problem Here
 
-- Business implementation                   - * first step
+- Business implementation                   - *Done
     -- Service and Controller
     -- Status codes best practices
     -- add hashing for password
     -- updatePassword {password : 123 -- > check , updatePassword : 321 -- > update}
-
     -- Class for response (Message and data(list ,error) )
     -- Cheeking for any action (if user not exist)
     -- Mapper Class and DTO
 
-- exception handler
+- exception handler                      *Done
     -- Class for response (Message and data(list ,error) )
     - Binding exception           -Done
     - Runtime exception           -Done
