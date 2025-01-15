@@ -60,12 +60,17 @@ paths:
         '200':
           description: User created successfully
           content:
-            application/json:
+            text/plain:
               schema:
                 type: string
-                example: "User added successfully."
-        '400':
-          description: Invalid input
+                example: User created successfully
+        '404':
+          description: User not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: User not found
 
     get:
       tags:

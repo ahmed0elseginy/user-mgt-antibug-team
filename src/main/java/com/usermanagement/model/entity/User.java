@@ -27,11 +27,11 @@ public class User {
     private String mobileNumber;
     private String role;
 
-    @OneToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "gender_id")
     private Gender gender;
 
-    @OneToOne(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "status_id")
     private Status status;
 

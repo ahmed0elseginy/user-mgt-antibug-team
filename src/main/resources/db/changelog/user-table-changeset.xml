@@ -19,7 +19,6 @@
             <column name="full_name" type="VARCHAR(255)" />
             <column name="mobile_number" type="VARCHAR(255)" />
             <column name="role" type="VARCHAR(255)" />
-            <column name="gender" type="VARCHAR(255)" />
         </createTable>
     </changeSet>
 </databaseChangeLog>

@@ -20,10 +20,15 @@ public interface UserMapper {
     User UserDtoMapToUser(UserCreateDto userCreateDto, @MappingTarget User user);
 
 
-    @Mapping(target = "gender", ignore = true)
-    @Mapping(target = "status", ignore = true)
-//    @Mapping(target = "password", ignore = true)
+//    @Mapping(target = "gender", ignore = true)
+//    @Mapping(target = "status", ignore = true)
+////    @Mapping(target = "password", ignore = true)
+//    UserResponseDto userMapToUserResponseDto(User user);
+
+    @Mapping(source = "gender.gender", target = "gender")
+    @Mapping(source = "status.status", target = "status")
     UserResponseDto userMapToUserResponseDto(User user);
+
 
     //TODO best practices here
     //Update aer with vlan existing uses from a UserDto object.

@@ -116,6 +116,7 @@ public class UserImplementation implements UserService {
                 .collect(Collectors.toList());
     }
 
+
     //TODO Best practices here
     @Override
     public UserResponseDto getUserById(Integer id) {
