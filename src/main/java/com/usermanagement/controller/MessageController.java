@@ -1,6 +1,6 @@
 package com.usermanagement.controller;
 
-import com.usermanagement.model.dto.PublishMessageDto;
+import com.usermanagement.model.dto.request.PublishMessageDto;
 import com.usermanagement.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,8 @@ public class MessageController implements PublishMessageApi{
 
     @Override
     public ResponseEntity<String> publishMessage(PublishMessageDto publishMessageDto) {
-        jmsTemplate.convertAndSend("bridge-queue",messageService.Mapping(publishMessageDto));
+        jmsTemplate.convertAndSend("bridge-queue",
+                messageService.Mapping(publishMessageDto));
         return new ResponseEntity<>("Message successfully sent to the queue.", HttpStatus.OK);
     }
 

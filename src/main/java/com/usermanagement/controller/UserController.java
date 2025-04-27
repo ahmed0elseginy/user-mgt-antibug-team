@@ -1,10 +1,9 @@
 package com.usermanagement.controller;
 
-import com.usermanagement.model.dto.*;
-import com.usermanagement.model.dto.UserCreateDto;
-import com.usermanagement.model.dto.UserResponseDto;
-import com.usermanagement.model.dto.UserUpdateDto;
 import com.usermanagement.model.dto.UserUpdatePasswordDto;
+import com.usermanagement.model.dto.request.UserCreateDto;
+import com.usermanagement.model.dto.request.UserUpdateDto;
+import com.usermanagement.model.dto.response.UserResponseDto;
 import com.usermanagement.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

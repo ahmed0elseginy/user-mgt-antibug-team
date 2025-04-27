@@ -1,6 +1,5 @@
 package com.usermanagement.model.activemq;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

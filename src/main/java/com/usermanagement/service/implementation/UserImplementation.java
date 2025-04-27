@@ -1,12 +1,11 @@
 package com.usermanagement.service.implementation;
-
 import com.usermanagement.handler.PasswordMismatchException;
 import com.usermanagement.handler.UserNotFoundException;
 import com.usermanagement.mapper.UserMapper;
-import com.usermanagement.model.dto.UserCreateDto;
-import com.usermanagement.model.dto.UserResponseDto;
-import com.usermanagement.model.dto.UserUpdateDto;
 import com.usermanagement.model.dto.UserUpdatePasswordDto;
+import com.usermanagement.model.dto.request.UserCreateDto;
+import com.usermanagement.model.dto.request.UserUpdateDto;
+import com.usermanagement.model.dto.response.UserResponseDto;
 import com.usermanagement.model.entity.Gender;
 import com.usermanagement.model.entity.Status;
 import com.usermanagement.model.entity.User;
@@ -17,11 +16,9 @@ import com.usermanagement.service.UserService;
 import com.usermanagement.service.security.PasswordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 
 //TODO : Best practices in this Class
 @RequiredArgsConstructor
@@ -40,30 +37,28 @@ public class UserImplementation implements UserService {
 
     @Override //Done
     public String addUser(UserCreateDto userDto) {
+        Optional<Gender> gender = genderRepository.findByGender(userDto.getGender());
+        Optional<Status> status = statusRepository.findByStatus(userDto.getStatus());
 
-        Optional<Gender> gender=genderRepository.findByGender(userDto.getGender());
-        Optional<Status> status=statusRepository.findByStatus(userDto.getStatus());
-
-        User insertedUser=null;
-        if(gender.isPresent() && status.isPresent()){
-            User user =userMapper.UserDtoMapToUser(userDto, new User());
+        User insertedUser = null;
+        if (gender.isPresent() && status.isPresent()) {
+            User user = userMapper.UserDtoMapToUser(userDto, new User());
             user.setGender(gender.get());
             user.setStatus(status.get());
-            // Use the existing hashPassword method for password hashing
             String hashedPassword = passwordService.hashPassword(userDto.getPassword());
             user.setPassword(hashedPassword);
-             insertedUser=userRepository.save(user);
+            insertedUser = userRepository.save(user);
         }
-        if(insertedUser!=null){
+        if (insertedUser != null) {
             return "User added successfully";
-        }else{
+        } else {
             return "Something went wrong";
         }
 
     }
 
     @Override
-    public UserResponseDto updateUser(Integer id ,UserUpdateDto userUpdateDto) {
+    public UserResponseDto updateUser(Integer id, UserUpdateDto userUpdateDto) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with ID " + id + " not found."));
         userMapper.UpdateUserDtoMapToUser(userUpdateDto, user);
@@ -84,18 +79,16 @@ public class UserImplementation implements UserService {
     }
 
     @Override
-    public String updatePassword(Integer id , UserUpdatePasswordDto userUpdatePasswordDto){
+    public String updatePassword(Integer id, UserUpdatePasswordDto userUpdatePasswordDto) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
-
         if (!passwordService.verifyPassword(userUpdatePasswordDto.getOldPassword(), user.getPassword())) {
             throw new PasswordMismatchException("Old password does not match");
         }
-
         user.setPassword(passwordService.hashPassword(userUpdatePasswordDto.getNewPassword()));
         userRepository.save(user);
         return "Password updated successfully";
-/*
+        /*
         Optional<User> existingUser = userRepository.findById(id);
         if (existingUser.isPresent()) {
             User user = existingUser.get();

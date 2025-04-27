@@ -12,8 +12,8 @@ public class JmsConfig {
 
     @Bean
     public DefaultJmsListenerContainerFactory jsmListenserContainerFactory(
-            ConnectionFactory connectionFactory){
-        DefaultJmsListenerContainerFactory factory=
+            ConnectionFactory connectionFactory) {
+        DefaultJmsListenerContainerFactory factory =
                 new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setConcurrency("1-5");

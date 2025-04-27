@@ -1,10 +1,8 @@
 package com.usermanagement.mapper;
 
-import com.usermanagement.model.activemq.PublishMessage;
-import com.usermanagement.model.dto.PublishMessageDto;
-import com.usermanagement.model.dto.UserCreateDto;
-import com.usermanagement.model.dto.UserResponseDto;
-import com.usermanagement.model.dto.UserUpdateDto;
+import com.usermanagement.model.dto.request.UserCreateDto;
+import com.usermanagement.model.dto.request.UserUpdateDto;
+import com.usermanagement.model.dto.response.UserResponseDto;
 import com.usermanagement.model.entity.User;
 
 import org.mapstruct.Mapper;
@@ -19,12 +17,11 @@ public interface UserMapper {
     @Mapping(target = "status", ignore = true)
     User UserDtoMapToUser(UserCreateDto userCreateDto, @MappingTarget User user);
 
-
 //    @Mapping(target = "gender", ignore = true)
 //    @Mapping(target = "status", ignore = true)
-////    @Mapping(target = "password", ignore = true)
-//    UserResponseDto userMapToUserResponseDto(User user);
 
+    /// /    @Mapping(target = "password", ignore = true)
+//    UserResponseDto userMapToUserResponseDto(User user);
     @Mapping(source = "gender.gender", target = "gender")
     @Mapping(source = "status.status", target = "status")
     UserResponseDto userMapToUserResponseDto(User user);
